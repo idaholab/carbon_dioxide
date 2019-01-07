@@ -1,0 +1,34 @@
+Content:
+    carbon_dioxide:
+        root_dir: doc/content
+
+Renderer:
+    type: MooseDocs.base.MaterializeRenderer
+    name: carbon_dioxide
+    repo: https://hpcgitlab.hpc.inl.gov/idaholab/carbon_dioxide
+    home: https://hpcsc.inl.gov/ssl/CARBON_DIOXIDE/site/index.html
+    navigation:
+        Developers:
+            Workflow: workflow.md
+            Build Status: https://moosebuild.inl.gov/repo/idaholab/carbon_dioxide/
+
+Extensions:
+    appsyntax:
+        type: MooseDocs.extensions.appsyntax
+        executable: ${ROOT_DIR}
+        hide:
+            framework: !include ${MOOSE_DIR}/framework/doc/hidden.yml
+            fluid_properties: !include ${MOOSE_DIR}/modules/fluid_properties/doc/hidden.yml
+        includes:
+            - include
+            - ${MOOSE_DIR}/framework/include
+            - ${MOOSE_DIR}/modules/fluid_properties/include
+        remove:
+            framework: !include ${MOOSE_DIR}/framework/doc/remove.yml
+    globals:
+        type: MooseDocs.extensions.panoptic
+        shortcuts:
+            framework: !include ${MOOSE_DIR}/framework/doc/globals.yml
+    acronyms:
+        type: MooseDocs.extensions.acronym
+        acronyms: !include ${MOOSE_DIR}/framework/doc/acronyms.yml

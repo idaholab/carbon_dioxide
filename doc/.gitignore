@@ -1,0 +1,9 @@
+# Only ignore image files in the 1st-level subdirectories
+# (assuming that subdirectories only go to 3rd-level)
+
+!/*/*/*/**/*.jpg
+!/*/*/*/**/*.pdf
+!/*/*/*/**/*.png
+
+# The exception is doxygen, which has output *.png in html/
+doxygen/html/*.png

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# If $METHOD is not set, use opt
+if [ -z $METHOD ]; then
+  export METHOD=opt
+fi
+
+if [ -e ./unit/carbon_dioxide-unit-$METHOD ]
+then
+  ./unit/carbon_dioxide-unit-$METHOD
+elif [ -e ./carbon_dioxide-unit-$METHOD ]
+then
+  ./carbon_dioxide-unit-$METHOD
+else
+  echo "Executable missing!"
+  exit 1
+fi
