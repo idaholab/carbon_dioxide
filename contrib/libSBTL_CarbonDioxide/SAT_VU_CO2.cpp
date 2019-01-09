@@ -167,7 +167,7 @@ SBTLAPI int __stdcall SAT_VU_SPL(double v, double u, double& ps, double& ts, dou
     ul=U1_T_AUX_CO2(ts);
     uv=U2_T_AUX_CO2(ts);
 
-	int icount=0;
+    int icount=0;
     do {
         //populate right hand side and jacobian matrix - use dpt derivatives, rather than dp 
         DIFF_V_U_PMAX_CO2(ul, x1tmin, dvdu_min);
@@ -219,12 +219,12 @@ SBTLAPI int __stdcall SAT_VU_SPL(double v, double u, double& ps, double& ts, dou
         uv =uv -F[4];
         ps=pst*pst;
         vvt=log(vv);
-		if(icount++ > ITMAX) {
+        if(icount++ > ITMAX) {
             return I_ERR;
         }
     } while (fabs(dpl/ps)>tol_ps || fabs(dpv/ps)>tol_ps ||
-    		 fabs(dtl   )>tol_ts || fabs(dtv   )>tol_ts ||
-			 fabs(dx    )>tol_x);
+             fabs(dtl   )>tol_ts || fabs(dtv   )>tol_ts ||
+             fabs(dx    )>tol_x);
     xvap=(u-ul)/(uv-ul);
     return I_OK;
 }
@@ -311,7 +311,7 @@ SBTLAPI int __stdcall SAT_VU_SPL(double v, double u, double& ps, double& ts, dou
     ul=U1_T_AUX_CO2(ts);
     uv=U2_T_AUX_CO2(ts);
 
-	int icount=0;
+    int icount=0;
     do {
         //populate right hand side and jacobian matrix 
         DIFF_V_U_PMAX_CO2(ul, x1tmin, dvdu_min);
@@ -365,11 +365,11 @@ SBTLAPI int __stdcall SAT_VU_SPL(double v, double u, double& ps, double& ts, dou
         vv =vv -F[2];
         uv =uv -F[3];
         vvt=log(vv);
-		if(icount++ > ITMAX) {
+        if(icount++ > ITMAX) {
             return I_ERR;
         }
     } while (fabs(dp/pl)>tol_ps || fabs(dt)>tol_ts ||
-    		 fabs(dg   )>tol_g  || fabs(dx    )>tol_x);
+             fabs(dg   )>tol_g  || fabs(dx    )>tol_x);
     ps=pl;
     ts=tl;
     xvap=(u-ul)/(uv-ul);
@@ -432,8 +432,8 @@ SBTLAPI int __stdcall SAT_U1_SPL(double u, double& ps, double& ts, double& vl) t
     static const double x1zmin=1.;
     static const double x1zmax=100.;
 
-	static const double df_p=1.e-8;   //rel. deviation in p
-	static const double df_t=1.e-8;   //abs. deviation in t
+    static const double df_p=1.e-8;   //rel. deviation in p
+    static const double df_t=1.e-8;   //abs. deviation in t
 
     double vt,x1tmin,x1tmax;
     double pst;
@@ -461,10 +461,10 @@ SBTLAPI int __stdcall SAT_U1_SPL(double u, double& ps, double& ts, double& vl) t
     //vt=(vl-x1tmin)/(x1tmax-x1tmin)*(x1zmax-x1zmin)+x1zmin;
     vt=x1zmax;
 
-	//newtons method
-	double f_p=-1.,ps_inv=1.,f_t=-1.;
-	int icount=0;
-	while(fabs(f_p*ps_inv)>df_p || fabs(f_t)>df_t) {
+    //newtons method
+    double f_p=-1.,ps_inv=1.,f_t=-1.;
+    int icount=0;
+    while(fabs(f_p*ps_inv)>df_p || fabs(f_t)>df_t) {
         DIFF_P_VU_L_CO2_SC(vt, u, px, dpdv_u, dpdu_v, dudv_p);      // px, scaled derivatives
         DIFF_T_VU_L_CO2_SC(vt, u, tx, dtdv_u, dtdu_v, dudv_t);      // tx, scaled derivatives
         DIFF_TS_P_CO2_T(pst, ts, dtsdpt);
@@ -475,12 +475,12 @@ SBTLAPI int __stdcall SAT_U1_SPL(double u, double& ps, double& ts, double& vl) t
         vt =vt +(f_t*2.*pst-dtsdpt*f_p)/den;
         ps=pst*pst;
         ps_inv=1./ps;
-		if(icount++>ITMAX) {
+        if(icount++>ITMAX) {
             return I_ERR;
         }
-	}
+    }
     vl=(vt-x1zmin)/(x1zmax-x1zmin)*(x1tmax-x1tmin)+x1tmin;
-	return I_OK;
+    return I_OK;
 }
 //
 SBTLAPI int __stdcall SAT_H1_SPL(double h, double& ps, double& ts, double& vl, double& ul, double& sl) throw()
@@ -495,8 +495,8 @@ SBTLAPI int __stdcall SAT_H1_SPL(double h, double& ps, double& ts, double& vl, d
     static const double x1zmax=100.;
     static const double K2=1./(x1zmax-x1zmin);
 
-	static const double df_p=1.e-8;   //rel. deviation in p
-	static const double df_t=1.e-8;   //abs. deviation in t
+    static const double df_p=1.e-8;   //rel. deviation in p
+    static const double df_t=1.e-8;   //abs. deviation in t
 
     double pst;
     double v_u_pmax, dvdu_pmax, v_u_spndl, dvdu_spndl, K;
@@ -523,10 +523,10 @@ SBTLAPI int __stdcall SAT_H1_SPL(double h, double& ps, double& ts, double& vl, d
     ps=pst*pst;
     vl=V1_H_AUX_CO2(h);
 
-	//newtons method
-	double f_p=-1.,ps_inv=1.,f_t=-1.;
-	int icount=0;
-	while(fabs(f_p*ps_inv)>df_p || fabs(f_t)>df_t) {
+    //newtons method
+    double f_p=-1.,ps_inv=1.,f_t=-1.;
+    int icount=0;
+    while(fabs(f_p*ps_inv)>df_p || fabs(f_t)>df_t) {
         ul=h-ps*vl*1.e3;
         //scale v with scaling parameters for p and t (iteration in transformed coordinates)
         DIFF_V_U_PMAX_CO2(ul, v_u_pmax, dvdu_pmax);
@@ -558,13 +558,13 @@ SBTLAPI int __stdcall SAT_H1_SPL(double h, double& ps, double& ts, double& vl, d
         pst=pst+( f_p*dftdv_pst-dfpdv_pst*f_t)/den;
         ps=pst*pst;
         ps_inv=1./ps;
-		if(icount++>ITMAX) {
+        if(icount++>ITMAX) {
             return I_ERR;
         }
-	}
+    }
     sl=S_VU_L_CO2_T(vt, ul);
 
-	return I_OK;
+    return I_OK;
 }
 //
 SBTLAPI int __stdcall SAT_V2_SPL_T(double vt, double& ps, double& ts, double& uv) throw()
@@ -575,8 +575,8 @@ SBTLAPI int __stdcall SAT_V2_SPL_T(double vt, double& ps, double& ts, double& uv
     static const double vtc=-6.1476132323390168;
     static const double uc=316.468709888;
 
-	static const double df_p=1.e-8;   //rel. deviation in p
-	static const double df_t=1.e-8;   //abs. deviation in t
+    static const double df_p=1.e-8;   //rel. deviation in p
+    static const double df_t=1.e-8;   //abs. deviation in t
 
     double pst;
     double tx, dtdv_u, dtdu_v, dudv_t;
@@ -596,10 +596,10 @@ SBTLAPI int __stdcall SAT_V2_SPL_T(double vt, double& ps, double& ts, double& uv
     ps=pst*pst;
     uv=U2_V_AUX_CO2_T(vt);
 
-	//newtons method
-	double f_p=-1.,ps_inv=1.,f_t=-1.;
-	int icount=0;
-	while(fabs(f_p*ps_inv)>df_p || fabs(f_t)>df_t) {
+    //newtons method
+    double f_p=-1.,ps_inv=1.,f_t=-1.;
+    int icount=0;
+    while(fabs(f_p*ps_inv)>df_p || fabs(f_t)>df_t) {
         DIFF_P_VU_G_CO2_TT(vt, uv, px, dpdv_u, dpdu_v, dudv_p);      // px, transformed derivatives
         DIFF_T_VU_G_CO2_TT(vt, uv, tx, dtdv_u, dtdu_v, dudv_t);      // tx, transformed derivatives
         DIFF_TS_P_CO2_T(pst, ts, dtsdpt);
@@ -610,11 +610,11 @@ SBTLAPI int __stdcall SAT_V2_SPL_T(double vt, double& ps, double& ts, double& uv
         uv =uv +(f_t*2.*pst-dtsdpt*f_p)/den;
         ps=pst*pst;
         ps_inv=1./ps;
-		if(icount++>ITMAX) {
+        if(icount++>ITMAX) {
             return I_ERR;
         }
-	}
-	return I_OK;
+    }
+    return I_OK;
 }
 //
 SBTLAPI int __stdcall SAT_S2_SPL(double s, double& ps, double& ts, double& vv, double& vvt, double& uv) throw()
@@ -626,9 +626,9 @@ SBTLAPI int __stdcall SAT_S2_SPL(double s, double& ps, double& ts, double& vv, d
     static const double uc=316.468709888;
     static const double sc=1.43362534304;
 
-	static const double df_p=1.e-8;   //rel. deviation in p
-	static const double df_t=1.e-8;   //abs. deviation in t
-	static const double df_s=1.e-8;   //abs. deviation in s
+    static const double df_p=1.e-8;   //rel. deviation in p
+    static const double df_t=1.e-8;   //abs. deviation in t
+    static const double df_s=1.e-8;   //abs. deviation in s
 
     double pst;
     double tx, dtdv_u, dtdu_v, dudv_t;
@@ -654,10 +654,10 @@ SBTLAPI int __stdcall SAT_S2_SPL(double s, double& ps, double& ts, double& vv, d
     vvt=V2_P_AUX_CO2_T(lnp);
     uv=U2_V_AUX_CO2_T(vvt);
 
-	//newtons method
-	double f_p=-1.,ps_inv=1.,f_t=-1.,f_s=-1.;
-	int icount=0;
-	while(fabs(f_p*ps_inv)>df_p || fabs(f_t)>df_t || fabs(f_s)>df_s) {
+    //newtons method
+    double f_p=-1.,ps_inv=1.,f_t=-1.,f_s=-1.;
+    int icount=0;
+    while(fabs(f_p*ps_inv)>df_p || fabs(f_t)>df_t || fabs(f_s)>df_s) {
         DIFF_P_VU_G_CO2_TT(vvt, uv, px, dpdv_u, dpdu_v, dudv_p);      // px, transformed derivatives
         DIFF_T_VU_G_CO2_TT(vvt, uv, tx, dtdv_u, dtdu_v, dudv_t);      // tx, transformed derivatives
         DIFF_S_VU_G_CO2_TT(vvt, uv, sx, dsdv_u, dsdu_v, dudv_s);      // sx, transformed derivatives
@@ -679,12 +679,12 @@ SBTLAPI int __stdcall SAT_S2_SPL(double s, double& ps, double& ts, double& vv, d
         uv =uv +(-f_p*(dftdpst*dfsdvvt)+f_t*dfpdpst*dfsdvvt-f_s*(dfpdpst*dftdvvt-dfpdvvt*dftdpst))/den;
         ps=pst*pst;
         ps_inv=1./ps;
-		if(icount++>ITMAX) {
+        if(icount++>ITMAX) {
             return I_ERR;
         }
-	}
+    }
     vv=exp(vvt);
-	return I_OK;
+    return I_OK;
 }
 //
 SBTLAPI int __stdcall SAT_HS_SPL(double h, double s, double& ps, double& ts, double& xvap, double& vl, double& vv, double& vvt, double& ul, double& uv) throw()
@@ -765,7 +765,7 @@ SBTLAPI int __stdcall SAT_HS_SPL(double h, double s, double& ps, double& ts, dou
     ul=U1_T_AUX_CO2(ts);
     uv=U2_T_AUX_CO2(ts);
 
-	int icount=0;
+    int icount=0;
     do {
         //populate right hand side and jacobian matrix - use dpt derivatives, rather than dp 
         DIFF_V_U_PMAX_CO2(ul, x1tmin, dvdu_min);
@@ -832,12 +832,12 @@ SBTLAPI int __stdcall SAT_HS_SPL(double h, double s, double& ps, double& ts, dou
         uv =uv -F[4];
         ps=pst*pst;
         vvt=log(vv);
-		if(icount++ > ITMAX) {
+        if(icount++ > ITMAX) {
             return I_ERR;
         }
     } while (fabs(dpl/ps)>tol_ps || fabs(dpv/ps)>tol_ps ||
-    		 fabs(dtl   )>tol_ts || fabs(dtv   )>tol_ts ||
-			 fabs(dx    )>tol_x);
+             fabs(dtl   )>tol_ts || fabs(dtv   )>tol_ts ||
+             fabs(dx    )>tol_x);
     xvap=(h-hl)/(hv-hl);
     return I_OK;
 }
@@ -920,7 +920,7 @@ SBTLAPI int __stdcall SAT_VH_SPL(double v, double h, double& ps, double& ts, dou
     ul=U1_T_AUX_CO2(ts);
     uv=U2_T_AUX_CO2(ts);
 
-	int icount=0;
+    int icount=0;
     do {
         //populate right hand side and jacobian matrix - use dpt derivatives, rather than dp 
         DIFF_V_U_PMAX_CO2(ul, x1tmin, dvdu_min);
@@ -983,12 +983,12 @@ SBTLAPI int __stdcall SAT_VH_SPL(double v, double h, double& ps, double& ts, dou
         uv =uv -F[4];
         ps=pst*pst;
         vvt=log(vv);
-		if(icount++ > ITMAX) {
+        if(icount++ > ITMAX) {
             return I_ERR;
         }
     } while (fabs(dpl/ps)>tol_ps || fabs(dpv/ps)>tol_ps ||
-    		 fabs(dtl   )>tol_ts || fabs(dtv   )>tol_ts ||
-			 fabs(dx    )>tol_x);
+             fabs(dtl   )>tol_ts || fabs(dtv   )>tol_ts ||
+             fabs(dx    )>tol_x);
     xvap=(h-hl)/(hv-hl);
     return I_OK;
 }

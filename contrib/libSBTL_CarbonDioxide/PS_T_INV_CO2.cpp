@@ -144,24 +144,24 @@ SBTLAPI double __stdcall PS_T_INV_CO2(double x1_val) throw()
 //
     double a, b, c, res;
 
-	while (true) {
-		val=&data_TSPCO2[3*i];
+    while (true) {
+        val=&data_TSPCO2[3*i];
 
-		a=val[2];
-		b=val[1];
-		c=val[0]-x1_val;
+        a=val[2];
+        b=val[1];
+        c=val[0]-x1_val;
 
         res=(-b+sqrt(b*b-4.0*a*c))/(2.0*a)+x1_TSPCO2[i];
 
-		if(res<x1_RS_TSPCO2[i] /* && i>=0 */) {
-			if(i==0) break;
-			i--;
-		} else if(res>x1_RS_TSPCO2[i+1] && i<=445) {
-			i++;
-			if(i>445) break;
-		} else {
-			break;
-		}
+        if(res<x1_RS_TSPCO2[i] /* && i>=0 */) {
+            if(i==0) break;
+            i--;
+        } else if(res>x1_RS_TSPCO2[i+1] && i<=445) {
+            i++;
+            if(i>445) break;
+        } else {
+            break;
+        }
     }
     return res*res;
 }
