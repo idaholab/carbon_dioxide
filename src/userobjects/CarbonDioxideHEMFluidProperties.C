@@ -8,6 +8,9 @@ registerMooseObject("CarbonDioxideApp", CarbonDioxideHEMFluidProperties);
 
 const Real CarbonDioxideHEMFluidProperties::_P_critical = 7.37729837321E+6;
 
+extern "C" double __stdcall SIGMA_TS_CO2(double t);
+extern "C" void __stdcall DIFF_TS_P_CO2(double p, double & ts, double & dtsdp);
+
 template <>
 InputParameters
 validParams<CarbonDioxideHEMFluidProperties>()
@@ -498,25 +501,27 @@ CarbonDioxideHEMFluidProperties::h_dpT(
 Real
 CarbonDioxideHEMFluidProperties::saturation_T(Real pressure) const
 {
-  return T_sat(pressure * _to_MPa);
+  return TS_P_CO2(pressure * _to_MPa);
 }
 
 Real
 CarbonDioxideHEMFluidProperties::saturation_P(Real temperature) const
 {
-  return p_sat(temperature) * _to_Pa;
+  return PS_T_INV_CO2(temperature) * _to_Pa;
 }
 
 Real
 CarbonDioxideHEMFluidProperties::surfaceTension(Real temperature) const
 {
-  return sigma(temperature);
+  return SIGMA_TS_CO2(temperature) * 1e-3;
 }
 
 Real
 CarbonDioxideHEMFluidProperties::dT_dP_saturation(Real pressure) const
 {
-  return dT_dP_sat(pressure);
+  double temperature, dtsdp;
+  DIFF_TS_P_CO2(pressure * 1e-6, temperature, dtsdp);
+  return dtsdp * 1e-6;
 }
 
 Real
