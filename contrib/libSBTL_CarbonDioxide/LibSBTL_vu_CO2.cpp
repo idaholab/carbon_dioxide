@@ -55,7 +55,7 @@ SBTLAPI void __stdcall ireg_vu_SBTLCO2(double v, double u, STR_vu_SBTL_CO2& r) t
     static const double vc=1./467.60000128174;
     static const double uc=316.468709888;
     static const double u2max= 398.81; // 398.805136516975;
-    static const double upmaxtmax=1354.05666708; 	
+    static const double upmaxtmax=1354.05666708;
     static const double vpmaxtmax=0.00311821748722;
     static const double upmintmax=1400.83548841;
     static const double vpmintmax=491.203124314;
@@ -744,7 +744,7 @@ SBTLAPI void __stdcall ireg_ph_SBTLCO2(double p, double h, STR_vu_SBTL_CO2& r) t
 SBTLAPI void __stdcall ireg_hs_SBTLCO2(double h, double s, STR_vu_SBTL_CO2& r) throw()
 {
     double smin,smax,hmax,s1,hg;
-    double ps,ts,x,v1,u1,h1,v2,v2t,u2,h2;
+    double ps,ts,x,v1,u1,v2,v2t,u2,h2;
     double v,vt,u;
     int ireg;
 //
@@ -756,9 +756,9 @@ SBTLAPI void __stdcall ireg_hs_SBTLCO2(double h, double s, STR_vu_SBTL_CO2& r) t
     //static const double hl_min=27.5;      //lower boundary of h in L
     static const double h2_max=437.1;       //maximum of h" (round up)
     static const double h1tr=80.0355261118;
-	static const double h2tr=430.416167646;
-	static const double s1tr=0.521319785219;
-	static const double s2tr=2.13901869162;
+    static const double h2tr=430.416167646;
+    static const double s1tr=0.521319785219;
+    static const double s2tr=2.13901869162;
     static const double qtr=1./(h2tr-h1tr);
     //static const double upmintmax=1400.83548841;
     static const double hpmintmax=1646.43705056;
@@ -846,8 +846,6 @@ SBTLAPI void __stdcall ireg_hs_SBTLCO2(double h, double s, STR_vu_SBTL_CO2& r) t
         break;
     case(IREG_TP):
         SAT_HS_SPL(h, s, ps, ts, x, v1, v2, v2t, u1, u2);
-        h1=u1+ps*v1*1.e3;
-        h2=u2+ps*v2*1.e3;
         v=v1+x*(v2-v1);
         u=u1+x*(u2-u1);
         break;
@@ -875,7 +873,7 @@ SBTLAPI void __stdcall ireg_vh_SBTLCO2(double v, double h, STR_vu_SBTL_CO2& r) t
     static const double hc=uc+pc*vc*1.e3;
     static const double h2_max=437.1;       //maximum of h" (round up)
     static const double h1tr=80.0355261118;
-	static const double h2tr=430.416167646;
+    static const double h2tr=430.416167646;
     static const double v1tr=0.000848563173213;
     static const double v2tr=0.0726697446683;
     static const double qtr=1./(h2tr-h1tr);
@@ -989,16 +987,16 @@ SBTLAPI int __stdcall flash_vu_SBTLCO2(double v, double u, int& ireg, double& p,
     double alpha_v,K1,K2,rho_m,K_m;
     double cp1,cp2,cv1,cv2,w1,w2,eta1,eta2,lambda1,lambda2;
 //
-	p      =ERR_VAL;
-	t      =ERR_VAL;
-	x      =ERR_VAL;
-	alpha_l=ERR_VAL;
-	s      =ERR_VAL;
-	cp     =ERR_VAL;
-	cv     =ERR_VAL;
-	w      =ERR_VAL;
-	eta    =ERR_VAL;
-	lambda =ERR_VAL;
+    p      =ERR_VAL;
+    t      =ERR_VAL;
+    x      =ERR_VAL;
+    alpha_l=ERR_VAL;
+    s      =ERR_VAL;
+    cp     =ERR_VAL;
+    cv     =ERR_VAL;
+    w      =ERR_VAL;
+    eta    =ERR_VAL;
+    lambda =ERR_VAL;
 //
     ireg_vu_SBTLCO2(v, u, str);
     ireg=str.ireg;
@@ -1020,7 +1018,7 @@ SBTLAPI int __stdcall flash_vu_SBTLCO2(double v, double u, int& ireg, double& p,
         eta   =ETA_VU_L_CO2_T(str.vls,u);
         lambda=LAMBDA_VU_L_CO2_T(str.vls,u);
         break;
-	case(IREG_G):
+    case(IREG_G):
         p     =P_VU_G_CO2_T(str.vt,u);
         t     =T_VU_G_CO2_T(str.vt,u);
         s     =S_VU_G_CO2_T(str.vt,u);
@@ -1034,8 +1032,8 @@ SBTLAPI int __stdcall flash_vu_SBTLCO2(double v, double u, int& ireg, double& p,
         w     =W_VU_G_CO2_T(str.vt,u);
         eta   =ETA_VU_G_CO2_T(str.vt,u);
         lambda=LAMBDA_VU_G_CO2_T(str.vt,u);
-	    break;
-	case(IREG_TP):
+        break;
+    case(IREG_TP):
         p=str.ps;
         t=str.ts;
         x=str.x;
@@ -1075,9 +1073,9 @@ SBTLAPI int __stdcall flash_vu_SBTLCO2(double v, double u, int& ireg, double& p,
         lambda1=LAMBDA_VU_L_CO2_T(str.v1s,str.u1);
         lambda2=LAMBDA_VU_G_CO2_T(str.v2t  ,str.u2);
         lambda =lambda1+alpha_v*(lambda2-lambda1);
-		break;
-	default:
-		return I_ERR;
+    break;
+    default:
+    return I_ERR;
     }
     return I_OK;
 }
@@ -1099,16 +1097,16 @@ SBTLAPI int __stdcall flash_deriv_vu_SBTLCO2(double v, double u, int& ireg, doub
     double dsdv_u_1, dsdu_v_1, dudv_s_1, dsdv_u_2, dsdu_v_2, dudv_s_2;
     double ds1dps,ds2dps,dsdps_u,dsdu_ps,dsdv_ps,dsdps_v;
 //
-	p      =ERR_VAL;
-	t      =ERR_VAL;
-	x      =ERR_VAL;
-	alpha_l=ERR_VAL;
-	s      =ERR_VAL;
-	cp     =ERR_VAL;
-	cv     =ERR_VAL;
-	w      =ERR_VAL;
-	eta    =ERR_VAL;
-	lambda =ERR_VAL;
+    p      =ERR_VAL;
+    t      =ERR_VAL;
+    x      =ERR_VAL;
+    alpha_l=ERR_VAL;
+    s      =ERR_VAL;
+    cp     =ERR_VAL;
+    cv     =ERR_VAL;
+    w      =ERR_VAL;
+    eta    =ERR_VAL;
+    lambda =ERR_VAL;
     dpdv_u=ERR_VAL;         dpdu_v=ERR_VAL;         dudv_p=ERR_VAL;
     dtdv_u=ERR_VAL;         dtdu_v=ERR_VAL;         dudv_t=ERR_VAL;
     dsdv_u=ERR_VAL;         dsdu_v=ERR_VAL;         dudv_s=ERR_VAL;
@@ -1138,7 +1136,7 @@ SBTLAPI int __stdcall flash_deriv_vu_SBTLCO2(double v, double u, int& ireg, doub
         DIFF_ETA_VU_L_CO2_T(str.vls, str.dz_l.x1tmin, str.dz_l.x1tmax, str.dz_l.dvdu_vt, str.dz_l.K, u, eta, detadv_u, detadu_v, dudv_eta);
         DIFF_LAMBDA_VU_L_CO2_T(str.vls, str.dz_l.x1tmin, str.dz_l.x1tmax, str.dz_l.dvdu_vt, str.dz_l.K, u, lambda, dlambdadv_u, dlambdadu_v, dudv_lambda);
         break;
-	case(IREG_G):
+    case(IREG_G):
         DIFF_P_VU_G_CO2_T(str.vt, v, u, p, dpdv_u, dpdu_v, dudv_p);
         DIFF_T_VU_G_CO2_T(str.vt, v, u, t, dtdv_u, dtdu_v, dudv_t);
         DIFF_S_VU_G_CO2_T(str.vt, v, u, s, dsdv_u, dsdu_v, dudv_s);
@@ -1147,8 +1145,8 @@ SBTLAPI int __stdcall flash_deriv_vu_SBTLCO2(double v, double u, int& ireg, doub
         DIFF_W_VU_G_CO2_T(str.vt, v, u, w, dwdv_u, dwdu_v, dudv_w);
         DIFF_ETA_VU_G_CO2_T(str.vt, v, u, eta, detadv_u, detadu_v, dudv_eta);
         DIFF_LAMBDA_VU_G_CO2_T(str.vt, v, u, lambda, dlambdadv_u, dlambdadu_v, dudv_lambda);
-	    break;
-	case(IREG_TP):
+        break;
+    case(IREG_TP):
         //Note: Derivatives of g, s, cp, cv, w, eta, and lambda are not calculated in the two-phase region currently.
         DIFF_SAT_VU_SPL(str.ps, str.x, str.v1, str.v1s, str.dz_1.x1tmin, str.dz_1.x1tmax, str.dz_1.dvdu_vt, str.dz_1.K, str.v2, str.v2t, str.u1, str.u2, str.d_tp);
         dudv_t=dudv_p=str.d_tp.dudv_pt;
@@ -1202,7 +1200,7 @@ SBTLAPI int __stdcall flash_deriv_vu_SBTLCO2(double v, double u, int& ireg, doub
         lambda =lambda1+alpha_v*(lambda2-lambda1);
         break;
     default:
-		return I_ERR;
+        return I_ERR;
     }
     return I_OK;
 }
@@ -1220,7 +1218,7 @@ SBTLAPI int __stdcall flash_pt_SBTLCO2(double p, double t, double& v, double& u)
     case(IREG_G):
         return PT_FLASH_G(p, t, v, vt, u);
     default:
-		return I_ERR;
+        return I_ERR;
     }
     return I_OK;
 }
@@ -1238,7 +1236,7 @@ SBTLAPI int __stdcall flash_deriv_pt_SBTLCO2(double p, double t, double& v, doub
     case(IREG_G):
         return PT_FLASH_DERIV_G(p, t, v, vt, dvdp_t, dvdt_p, dpdt_v, u, dudp_t, dudt_p, dpdt_u);
     default:
-		return I_ERR;
+        return I_ERR;
     }
     return I_OK;
 }
@@ -1340,8 +1338,8 @@ SBTLAPI int __stdcall flash_ps_SBTLCO2(double p, double s, double& v, double& u)
 {
     STR_vu_SBTL_CO2 str;
 //
-	v      =ERR_VAL;
-	u      =ERR_VAL;
+    v      =ERR_VAL;
+    u      =ERR_VAL;
 //
     //region determination: returns transformed value vt of vapor phase and saturation properties ps, ts, x, v1, v2, v2t, u1, u2 (if applicable)
     int str_state=str.GetStatePS(p,s);
@@ -1352,16 +1350,16 @@ SBTLAPI int __stdcall flash_ps_SBTLCO2(double p, double s, double& v, double& u)
         v     =str.v_;
         u     =str.u_;
         break;
-	case(IREG_G):
+    case(IREG_G):
         v     =str.v_;
         u     =str.u_;
-	    break;
+        break;
     case(IREG_TP):
         v     =str.v_;
         u     =str.u_;
-	    break;
-	default:
-		return I_ERR;
+        break;
+    default:
+        return I_ERR;
     }
     return I_OK;
 }
