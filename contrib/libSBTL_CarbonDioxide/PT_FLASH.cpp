@@ -77,10 +77,10 @@ SBTLAPI int __stdcall PT_FLASH_L(double p, double t, double& v, double& u) throw
     static const double tc=304.1282;
     static const double vc=1./467.60000128174;
     static const double uc=316.468709888;
-	static const double psxx=7.;
+    static const double psxx=7.;
 
-	static const double df_p=1.e-10; //-8   //rel. deviation in p
-	static const double df_t=1.e-10; //-8   //abs. deviation in t
+    static const double df_p=1.e-10; //-8   //rel. deviation in p
+    static const double df_t=1.e-10; //-8   //abs. deviation in t
 
     double tx,px,den;
     double dtdv_u, dtdu_v, dudv_t;
@@ -107,10 +107,10 @@ SBTLAPI int __stdcall PT_FLASH_L(double p, double t, double& v, double& u) throw
     x1tmax=V1_U_SPL_CO2(u);
     vs=(v-x1tmin)/(x1tmax-x1tmin)*(x1zmax-x1zmin)+x1zmin;
 
-	//newtons method
-	double f_p=-1.,f_t=-1.,p_inv=1./p;
-	int icount=0;
-	while(fabs(f_p*p_inv)>df_p || fabs(f_t)>df_t) {
+    //newtons method
+    double f_p=-1.,f_t=-1.,p_inv=1./p;
+    int icount=0;
+    while(fabs(f_p*p_inv)>df_p || fabs(f_t)>df_t) {
         DIFF_T_VU_L_CO2_SC(vs, u, tx, dtdv_u, dtdu_v, dudv_t);      // tx, scaled derivatives
         DIFF_P_VU_L_CO2_SC(vs, u, px, dpdv_u, dpdu_v, dudv_p);      // px, scaled derivatives
         f_p=px-p;
@@ -118,14 +118,14 @@ SBTLAPI int __stdcall PT_FLASH_L(double p, double t, double& v, double& u) throw
         den=dtdu_v*dpdv_u-dtdv_u*dpdu_v;
         vs=vs+(-dtdu_v*f_p+f_t*dpdu_v)/den;
         u =u +(-f_t*dpdv_u+dtdv_u*f_p)/den;
-		if(icount++>ITMAX) {
+        if(icount++>ITMAX) {
             return I_ERR;
         }
-	}
+    }
     x1tmin=V_U_PMAX_CO2(u);
     x1tmax=V1_U_SPL_CO2(u);
     v=(vs-x1zmin)/(x1zmax-x1zmin)*(x1tmax-x1tmin)+x1tmin;
-	return I_OK;
+    return I_OK;
 }
 //
 SBTLAPI int __stdcall PT_FLASH_DERIV_L(double p, double t, double& v, double& dvdp_t, double& dvdt_p, double& dpdt_v, double& u, double& dudp_t, double& dudt_p, double& dpdt_u) throw()
@@ -136,13 +136,13 @@ SBTLAPI int __stdcall PT_FLASH_DERIV_L(double p, double t, double& v, double& dv
     static const double tc=304.1282;
     static const double vc=1./467.60000128174;
     static const double uc=316.468709888;
-	static const double psxx=7.;
+    static const double psxx=7.;
     static const double x1zmin=1.;
     static const double x1zmax=100.;
     static const double K2=1./(x1zmax-x1zmin);
 
-	static const double df_p=1.e-10; //-8  //rel. deviation in p
-	static const double df_t=1.e-10; //-8  //abs. deviation in t
+    static const double df_p=1.e-10; //-8  //rel. deviation in p
+    static const double df_t=1.e-10; //-8  //abs. deviation in t
 
     double tx,px,den;
     double dtdv_u, dtdu_v, dudv_t;
@@ -169,10 +169,10 @@ SBTLAPI int __stdcall PT_FLASH_DERIV_L(double p, double t, double& v, double& dv
     x1tmax=V1_U_SPL_CO2(u);
     vs=(v-x1tmin)/(x1tmax-x1tmin)*(x1zmax-x1zmin)+x1zmin;
 
-	//newtons method
-	double f_p=-1.,f_t=-1.,p_inv=1./p;
-	int icount=0;
-	while(fabs(f_p*p_inv)>df_p || fabs(f_t)>df_t) {
+    //newtons method
+    double f_p=-1.,f_t=-1.,p_inv=1./p;
+    int icount=0;
+    while(fabs(f_p*p_inv)>df_p || fabs(f_t)>df_t) {
         DIFF_T_VU_L_CO2_SC(vs, u, tx, dtdv_u, dtdu_v, dudv_t);      // tx, scaled derivatives
         DIFF_P_VU_L_CO2_SC(vs, u, px, dpdv_u, dpdu_v, dudv_p);      // px, scaled derivatives
         f_p=px-p;
@@ -180,10 +180,10 @@ SBTLAPI int __stdcall PT_FLASH_DERIV_L(double p, double t, double& v, double& dv
         den=dtdu_v*dpdv_u-dtdv_u*dpdu_v;
         vs=vs+(-dtdu_v*f_p+f_t*dpdu_v)/den;
         u =u +(-f_t*dpdv_u+dtdv_u*f_p)/den;
-		if(icount++>ITMAX) {
+        if(icount++>ITMAX) {
             return I_ERR;
         }
-	}
+    }
     DIFF_V_U_PMAX_CO2(u, v_u_pmax, dvdu_pmax);
     DIFF_V1_U_SPL_CO2(u, v_u_spndl, dvdu_spndl);
     x1tmin=v_u_pmax;
@@ -213,10 +213,10 @@ SBTLAPI int __stdcall PT_FLASH_G(double p, double t, double& v, double& vt, doub
     static const double tc=304.1282;
     static const double vc=1./467.60000128174;
     static const double uc=316.468709888;
-	static const double psxx=7.;
+    static const double psxx=7.;
 
-	static const double df_p=1.e-10; //-8   //rel. deviation in p
-	static const double df_t=1.e-10; //-8   //abs. deviation in t
+    static const double df_p=1.e-10; //-8   //rel. deviation in p
+    static const double df_t=1.e-10; //-8   //abs. deviation in t
 
     double tx,px,den;
     double dtdv_u, dtdu_v, dudv_t;
@@ -241,10 +241,10 @@ SBTLAPI int __stdcall PT_FLASH_G(double p, double t, double& v, double& vt, doub
         if(vt<v2t) vt=v2t;
     }
 
-	//newtons method
-	double f_p=-1.,f_t=-1.,p_inv=1./p;
-	int icount=0;
-	while(fabs(f_p*p_inv)>df_p || fabs(f_t)>df_t) {
+    //newtons method
+    double f_p=-1.,f_t=-1.,p_inv=1./p;
+    int icount=0;
+    while(fabs(f_p*p_inv)>df_p || fabs(f_t)>df_t) {
         DIFF_T_VU_G_CO2_TT(vt, u, tx, dtdv_u, dtdu_v, dudv_t);      // tx, transformed derivatives
         DIFF_P_VU_G_CO2_TT(vt, u, px, dpdv_u, dpdu_v, dudv_p);      // px, transformed derivatives
         f_p=px-p;
@@ -252,12 +252,12 @@ SBTLAPI int __stdcall PT_FLASH_G(double p, double t, double& v, double& vt, doub
         den=dtdu_v*dpdv_u-dtdv_u*dpdu_v;
         vt=vt+(-dtdu_v*f_p+f_t*dpdu_v)/den;
         u =u +(-f_t*dpdv_u+dtdv_u*f_p)/den;
-		if(icount++>ITMAX) {
+        if(icount++>ITMAX) {
             return I_ERR;
         }
-	}
+    }
     v=exp(vt);
-	return I_OK;
+    return I_OK;
 }
 
 SBTLAPI int __stdcall PT_FLASH_DERIV_G(double p, double t, double& v, double& vt, double& dvdp_t, double& dvdt_p, double& dpdt_v, double& u, double& dudp_t, double& dudt_p, double& dpdt_u) throw()
@@ -266,10 +266,10 @@ SBTLAPI int __stdcall PT_FLASH_DERIV_G(double p, double t, double& v, double& vt
     static const double tc=304.1282;
     static const double vc=1./467.60000128174;
     static const double uc=316.468709888;
-	static const double psxx=7.;
+    static const double psxx=7.;
 
-	static const double df_p=1.e-10; //-8   //rel. deviation in p
-	static const double df_t=1.e-10; //-8   //abs. deviation in t
+    static const double df_p=1.e-10; //-8   //rel. deviation in p
+    static const double df_t=1.e-10; //-8   //abs. deviation in t
 
     double tx,px,den;
     double dtdv_u, dtdu_v, dudv_t;
@@ -295,10 +295,10 @@ SBTLAPI int __stdcall PT_FLASH_DERIV_G(double p, double t, double& v, double& vt
         if(vt<v2t) vt=v2t;
     }
 
-	//newtons method
-	double f_p=-1.,f_t=-1.,p_inv=1./p;
-	int icount=0;
-	while(fabs(f_p*p_inv)>df_p || fabs(f_t)>df_t) {
+    //newtons method
+    double f_p=-1.,f_t=-1.,p_inv=1./p;
+    int icount=0;
+    while(fabs(f_p*p_inv)>df_p || fabs(f_t)>df_t) {
         DIFF_T_VU_G_CO2_TT(vt, u, tx, dtdv_u, dtdu_v, dudv_t);      // tx, transformed derivatives
         DIFF_P_VU_G_CO2_TT(vt, u, px, dpdv_u, dpdu_v, dudv_p);      // px, transformed derivatives
         f_p=px-p;
@@ -306,10 +306,10 @@ SBTLAPI int __stdcall PT_FLASH_DERIV_G(double p, double t, double& v, double& vt
         den=dtdu_v*dpdv_u-dtdv_u*dpdu_v;
         vt=vt+(-dtdu_v*f_p+f_t*dpdu_v)/den;
         u =u +(-f_t*dpdv_u+dtdv_u*f_p)/den;
-		if(icount++>ITMAX) {
+        if(icount++>ITMAX) {
             return I_ERR;
         }
-	}
+    }
     v=exp(vt);
     //derivatives
     DIFF_P_VU_G_CO2_T(vt, v, u, p_, dpdv_u, dpdu_v, dudv_p);
@@ -322,7 +322,7 @@ SBTLAPI int __stdcall PT_FLASH_DERIV_G(double p, double t, double& v, double& vt
     dudp_t=1./(dpdu_v+dpdv_u/dudv_t);
     dudt_p=1./(dtdu_v+dtdv_u/dudv_p);
     dpdt_u=-dudt_p/dudp_t;
-	return I_OK;
+    return I_OK;
 }
 //
 SBTLAPI int PT_FLASH_G_T(double p, double t, double& vt, double& u) throw()
@@ -331,10 +331,10 @@ SBTLAPI int PT_FLASH_G_T(double p, double t, double& vt, double& u) throw()
     static const double tc=304.1282;
     static const double vc=1./467.60000128174;
     static const double uc=316.468709888;
-	static const double psxx=7.;
+    static const double psxx=7.;
 
-	static const double df_p=1.e-10; //-8   //rel. deviation in p
-	static const double df_t=1.e-10; //-8   //abs. deviation in t
+    static const double df_p=1.e-10; //-8   //rel. deviation in p
+    static const double df_t=1.e-10; //-8   //abs. deviation in t
 
     double /*v,*/tx,px,den;
     double dtdv_u, dtdu_v, dudv_t;
@@ -358,10 +358,10 @@ SBTLAPI int PT_FLASH_G_T(double p, double t, double& vt, double& u) throw()
         if(vt<v2t) vt=v2t;
     }
 
-	//newtons method
-	double f_p=-1.,f_t=-1.,p_inv=1./p;
-	int icount=0;
-	while(fabs(f_p*p_inv)>df_p || fabs(f_t)>df_t) {
+    //newtons method
+    double f_p=-1.,f_t=-1.,p_inv=1./p;
+    int icount=0;
+    while(fabs(f_p*p_inv)>df_p || fabs(f_t)>df_t) {
         DIFF_T_VU_G_CO2_TT(vt, u, tx, dtdv_u, dtdu_v, dudv_t);      // tx, transformed derivatives
         DIFF_P_VU_G_CO2_TT(vt, u, px, dpdv_u, dpdu_v, dudv_p);      // px, transformed derivatives
         f_p=px-p;
@@ -369,9 +369,9 @@ SBTLAPI int PT_FLASH_G_T(double p, double t, double& vt, double& u) throw()
         den=dtdu_v*dpdv_u-dtdv_u*dpdu_v;
         vt=vt+(-dtdu_v*f_p+f_t*dpdu_v)/den;
         u =u +(-f_t*dpdv_u+dtdv_u*f_p)/den;
-		if(icount++>ITMAX) {
+        if(icount++>ITMAX) {
             return I_ERR;
         }
-	}
-	return I_OK;
+    }
+    return I_OK;
 }

@@ -72,7 +72,7 @@ SBTLAPI double __stdcall G_VU_L_CO2(double v, double u) throw()
     t=T_VU_L_CO2(v, u);
     s=S_VU_L_CO2(v, u);
 
-	return (u+p*v*1.e3-t*s);
+    return (u+p*v*1.e3-t*s);
 }
 //
 SBTLAPI double __stdcall G_VU_L_CO2_T(double v, double vspt, double vsz, double u) throw()
@@ -83,7 +83,7 @@ SBTLAPI double __stdcall G_VU_L_CO2_T(double v, double vspt, double vsz, double 
     t=T_VU_L_CO2_T(vspt, u);
     s=S_VU_L_CO2_T(vsz, u);
 
-	return (u+p*v*1.e3-t*s);
+    return (u+p*v*1.e3-t*s);
 }
 //
 #else
