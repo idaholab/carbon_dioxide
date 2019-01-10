@@ -1,9 +1,8 @@
 #include "CarbonDioxideHEMFluidProperties.h"
-#include "LibSBTL_vu_CO2.h"
-#include "SBTL_CO2.h"
-#include "SBTL_def.h"
-#include "SBTL_func.h"
-#include "common.h"
+#include "contrib/libSBTL_CarbonDioxide/LibSBTL_vu_CO2.h"
+#include "contrib/libSBTL_CarbonDioxide/SBTL_CO2.h"
+#include "contrib/libSBTL_CarbonDioxide/SBTL_def.h"
+#include "contrib/libSBTL_CarbonDioxide/SBTL_func.h"
 
 registerMooseObject("CarbonDioxideApp", CarbonDioxideHEMFluidProperties);
 

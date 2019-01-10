@@ -95,7 +95,7 @@ LIBSBTL_CARBON_DIOXIDE_objects   := $(patsubst %.cpp, %.$(obj-suffix), $(LIBSBTL
 LIBSBTL_CARBON_DIOXIDE_deps      := $(patsubst %.$(obj-suffix), %.$(obj-suffix).d, $(LIBSBTL_CARBON_DIOXIDE_objects))
 LIBSBTL_CARBON_DIOXIDE_LIB       := $(LIBSBTL_CARBON_DIOXIDE_DIR)/libSBTL_CarbonDioxide-$(METHOD).la
 
-app_INCLUDES += -I$(LIBSBTL_CARBON_DIOXIDE_DIR)
+app_INCLUDES += -I$(CARBON_DIOXIDE_DIR)
 app_LIBS += $(LIBSBTL_CARBON_DIOXIDE_LIB)
 
 $(LIBSBTL_CARBON_DIOXIDE_LIB): $(LIBSBTL_CARBON_DIOXIDE_objects)
