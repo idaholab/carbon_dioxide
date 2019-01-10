@@ -1,5 +1,5 @@
 #include "CarbonDioxideVaporFluidProperties.h"
-#include "SBTL_CO2.h"
+#include "contrib/libSBTL_CarbonDioxide/SBTL_CO2.h"
 
 extern "C" double P_VU_G_CO2(double v, double u);
 extern "C" double T_VU_G_CO2(double v, double u);

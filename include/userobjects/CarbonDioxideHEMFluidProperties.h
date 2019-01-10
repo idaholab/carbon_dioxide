@@ -3,8 +3,8 @@
 
 #include "HEMFluidProperties.h"
 #include "NaNInterface.h"
-#include "SBTL_CO2.h"
-#include "SBTL_flags.h"
+#include "contrib/libSBTL_CarbonDioxide/SBTL_CO2.h"
+#include "contrib/libSBTL_CarbonDioxide/SBTL_flags.h"
 
 class CarbonDioxideHEMFluidProperties;
 
