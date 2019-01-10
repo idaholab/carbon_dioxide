@@ -24,8 +24,8 @@ InputParameters validParams<CarbonDioxideLiquidFluidProperties>();
  * - surface tension:    kN/m
  */
 class CarbonDioxideLiquidFluidProperties : public SinglePhaseFluidProperties,
-                                        public LiquidFluidPropertiesInterface,
-                                        public NaNInterface
+                                           public LiquidFluidPropertiesInterface,
+                                           public NaNInterface
 {
 public:
   CarbonDioxideLiquidFluidProperties(const InputParameters & parameters);
