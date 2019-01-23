@@ -37,6 +37,7 @@
 #include "math.h"
 #include "SBTL_CO2.h"
 #include "SBTL_call_conv.h"
+#include <stdio.h>
 //
 #define ITMAX 10
 //
@@ -70,6 +71,7 @@ SBTLAPI double __stdcall U2_T_AUX_CO2(double t);
 //
 SBTLAPI int __stdcall PT_FLASH_L(double p, double t, double& v, double& u) throw()
 {
+    printf("CO2: PT_FLASH_L\n");
     double vs,x1tmin,x1tmax;
     static const double x1zmin=1.;
     static const double x1zmax=100.;

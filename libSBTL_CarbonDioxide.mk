@@ -92,27 +92,19 @@ LIBSBTL_CARBON_DIOXIDE_srcfiles  += $(LIBSBTL_CARBON_DIOXIDE_DIR)/W_VU_L_CO2.cpp
 # ADDITIONAL_CPPFLAGS += -DSBTL_USE_G_AUX
 
 LIBSBTL_CARBON_DIOXIDE_objects   := $(patsubst %.cpp, %.$(obj-suffix), $(LIBSBTL_CARBON_DIOXIDE_srcfiles))
-LIBSBTL_CARBON_DIOXIDE_deps      := $(patsubst %.$(obj-suffix), %.$(obj-suffix).d, $(LIBSBTL_CARBON_DIOXIDE_objects))
-LIBSBTL_CARBON_DIOXIDE_LIB       := $(LIBSBTL_CARBON_DIOXIDE_DIR)/libSBTL_CarbonDioxide-$(METHOD).la
+LIBSBTL_CARBON_DIOXIDE_deps      := $(patsubst %.cpp, %.$(obj-suffix).d, $(LIBSBTL_CARBON_DIOXIDE_srcfiles))
 
-app_INCLUDES += -I$(CARBON_DIOXIDE_DIR)
-app_LIBS += $(LIBSBTL_CARBON_DIOXIDE_LIB)
-
-$(LIBSBTL_CARBON_DIOXIDE_LIB): $(LIBSBTL_CARBON_DIOXIDE_objects)
-	@echo "Linking Library "$@"..."
-	@$(libmesh_LIBTOOL) --tag=CC $(LIBTOOLFLAGS) --mode=link --quiet \
-	  $(libmesh_CC) $(libmesh_CFLAGS) -o $@ $(LIBSBTL_CARBON_DIOXIDE_objects) $(libmesh_LDFLAGS) $(EXTERNAL_FLAGS) -rpath $(LIBSBTL_CARBON_DIOXIDE_DIR)
-	@$(libmesh_LIBTOOL) --mode=install --quiet install -c $(LIBSBTL_CARBON_DIOXIDE_LIB) $(LIBSBTL_CARBON_DIOXIDE_DIR)
-
-$(app_EXEC): $(LIBSBTL_CARBON_DIOXIDE_LIB)
+ADDITIONAL_INCLUDES := -I$(CARBON_DIOXIDE_DIR)
+ADDITIONAL_APP_OBJECTS := $(LIBSBTL_CARBON_DIOXIDE_objects)
 
 -include $(LIBSBTL_CARBON_DIOXIDE_deps)
+
+clean:: cleanlibSBTL_CarbonDioxide
 
 cleanlibSBTL_CarbonDioxide:
 	@echo "Cleaning libSBTL_CarbonDioxide"
 	@rm -f $(LIBSBTL_CARBON_DIOXIDE_objects)
 	@rm -f $(LIBSBTL_CARBON_DIOXIDE_deps)
-	@rm -f $(LIBSBTL_CARBON_DIOXIDE_LIB)
 	@rm -f $(LIBSBTL_CARBON_DIOXIDE_DIR)/libSBTL_CarbonDioxide-$(METHOD)*.dylib
 	@rm -f $(LIBSBTL_CARBON_DIOXIDE_DIR)/libSBTL_CarbonDioxide-$(METHOD)*.so*
 	@rm -f $(LIBSBTL_CARBON_DIOXIDE_DIR)/libSBTL_CarbonDioxide-$(METHOD)*.a

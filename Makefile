@@ -47,9 +47,9 @@ FLUID_PROPERTIES  := yes
 include $(MOOSE_DIR)/modules/modules.mk
 ###############################################################################
 
-include libSBTL_CarbonDioxide.mk
 
 # dep apps
+include libSBTL_CarbonDioxide.mk
 APPLICATION_DIR    := $(CURRENT_DIR)
 APPLICATION_NAME   := carbon_dioxide
 BUILD_EXEC         := yes
