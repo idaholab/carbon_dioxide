@@ -47,10 +47,10 @@ extern "C" double __stdcall PS_T_INV_CO2(double t);
 extern "C" void   __stdcall DIFF_TS_P_CO2(double p, double& ts, double& dtsdp);
 //
 // (p,t)-flash routines
-extern "C" int    __stdcall PT_FLASH_L(double p, double t, double& v, double& u);
-extern "C" int    __stdcall PT_FLASH_DERIV_L(double p, double t, double& v, double& dvdp_t, double& dvdt_p, double& dpdt_v, double& u, double& dudp_t, double& dudt_p, double& dpdt_u);
-extern "C" int    __stdcall PT_FLASH_G(double p, double t, double& v, double& vt, double& u);
-extern "C" int    __stdcall PT_FLASH_DERIV_G(double p, double t, double& v, double& vt, double& dvdp_t, double& dvdt_p, double& dpdt_v, double& u, double& dudp_t, double& dudt_p, double& dpdt_u);
+extern "C" int    __stdcall PT_FLASH_L_CO2(double p, double t, double& v, double& u);
+extern "C" int    __stdcall PT_FLASH_DERIV_L_CO2(double p, double t, double& v, double& dvdp_t, double& dvdt_p, double& dpdt_v, double& u, double& dudp_t, double& dudt_p, double& dpdt_u);
+extern "C" int    __stdcall PT_FLASH_G_CO2(double p, double t, double& v, double& vt, double& u);
+extern "C" int    __stdcall PT_FLASH_DERIV_G_CO2(double p, double t, double& v, double& vt, double& dvdp_t, double& dvdt_p, double& dpdt_v, double& u, double& dudp_t, double& dudt_p, double& dpdt_u);
 //
 // (p,v)-inverse spline functions
 extern "C" double __stdcall U_VP_L_CO2(double v, double p);
@@ -59,32 +59,32 @@ extern "C" double __stdcall U_VP_G_CO2(double v, double p);
 extern "C" void   __stdcall DIFF_U_VP_G_CO2(double v, double p, double &u, double& dudv_p, double& dudp_v, double& dpdv_u);
 //
 // (p,s)-flash routines
-extern "C" int    __stdcall PS_FLASH_L(double p, double s, double& v, double& u);
-extern "C" void   __stdcall PS_FLASH_DERIV_L(double v, double u, double& dvdp_s, double& dvds_p, double& dpds_v, double& dudp_s, double& duds_p, double& dpds_u);
-extern "C" int    __stdcall PS_FLASH_G(double p, double s, double& v, double& vt, double& u);
-extern "C" void   __stdcall PS_FLASH_DERIV_G(double v, double vt, double u, double& dvdp_s, double& dvds_p, double& dpds_v, double& dudp_s, double& duds_p, double& dpds_u);
+extern "C" int    __stdcall PS_FLASH_L_CO2(double p, double s, double& v, double& u);
+extern "C" void   __stdcall PS_FLASH_DERIV_L_CO2(double v, double u, double& dvdp_s, double& dvds_p, double& dpds_v, double& dudp_s, double& duds_p, double& dpds_u);
+extern "C" int    __stdcall PS_FLASH_G_CO2(double p, double s, double& v, double& vt, double& u);
+extern "C" void   __stdcall PS_FLASH_DERIV_G_CO2(double v, double vt, double u, double& dvdp_s, double& dvds_p, double& dpds_v, double& dudp_s, double& duds_p, double& dpds_u);
 //
 // (p,h)-flash routines
-extern "C" int    __stdcall PH_FLASH_L(double p, double h, double& v, double& u);
-extern "C" void   __stdcall PH_FLASH_DERIV_L(double p, double v, double u, double& dvdp_h, double& dvdh_p, double& dpdh_v, double& dudp_h, double& dudh_p, double& dpdh_u);
-extern "C" void   __stdcall PH_T_FLASH_DERIV_L(double p, double v, double u, double& t, double& dtdp_h, double& dtdh_p, double& dpdh_t);
-extern "C" int    __stdcall PH_FLASH_G(double p, double h, double& v, double& vt, double& u);
-extern "C" void   __stdcall PH_FLASH_DERIV_G(double p, double v, double vt, double u, double& dvdp_h, double& dvdh_p, double& dpdh_v, double& dudp_h, double& dudh_p, double& dpdh_u);
-extern "C" void   __stdcall PH_T_FLASH_DERIV_G(double p, double v, double vt, double u, double& t, double& dtdp_h, double& dtdh_p, double& dpdh_t);
+extern "C" int    __stdcall PH_FLASH_L_CO2(double p, double h, double& v, double& u);
+extern "C" void   __stdcall PH_FLASH_DERIV_L_CO2(double p, double v, double u, double& dvdp_h, double& dvdh_p, double& dpdh_v, double& dudp_h, double& dudh_p, double& dpdh_u);
+extern "C" void   __stdcall PH_T_FLASH_DERIV_L_CO2(double p, double v, double u, double& t, double& dtdp_h, double& dtdh_p, double& dpdh_t);
+extern "C" int    __stdcall PH_FLASH_G_CO2(double p, double h, double& v, double& vt, double& u);
+extern "C" void   __stdcall PH_FLASH_DERIV_G_CO2(double p, double v, double vt, double u, double& dvdp_h, double& dvdh_p, double& dpdh_v, double& dudp_h, double& dudh_p, double& dpdh_u);
+extern "C" void   __stdcall PH_T_FLASH_DERIV_G_CO2(double p, double v, double vt, double u, double& t, double& dtdp_h, double& dtdh_p, double& dpdh_t);
 //
 // (h,s)-flash routines
-extern "C" int    __stdcall HS_FLASH_L(double h, double s, double& v, double& u);
-extern "C" void   __stdcall HS_FLASH_DERIV_L(double v, double u, double& dvdh_s, double& dvds_h, double& dhds_v, double& dudh_s, double& duds_h, double& dhds_u);
-extern "C" void   __stdcall HS_PT_FLASH_DERIV_L(double v, double u, double& p, double& dpdh_s, double& dpds_h, double& dhds_p, double& t, double& dtdh_s, double& dtds_h, double& dhds_t);
-extern "C" int    __stdcall HS_FLASH_G(double h, double s, double& v, double& vt, double& u);
-extern "C" void   __stdcall HS_FLASH_DERIV_G(double v, double vt, double u, double& dvdh_s, double& dvds_h, double& dhds_v, double& dudh_s, double& duds_h, double& dhds_u);
-extern "C" void   __stdcall HS_PT_FLASH_DERIV_G(double v, double vt, double u, double& p, double& dpdh_s, double& dpds_h, double& dhds_p, double& t, double& dtdh_s, double& dtds_h, double& dhds_t);
-extern "C" int    __stdcall SAT_HS_SPL(double h, double s, double& ps, double& ts, double& xvap, double& vl, double& vv, double& vvt, double& ul, double& uv);
+extern "C" int    __stdcall HS_FLASH_L_CO2(double h, double s, double& v, double& u);
+extern "C" void   __stdcall HS_FLASH_DERIV_L_CO2(double v, double u, double& dvdh_s, double& dvds_h, double& dhds_v, double& dudh_s, double& duds_h, double& dhds_u);
+extern "C" void   __stdcall HS_PT_FLASH_DERIV_L_CO2(double v, double u, double& p, double& dpdh_s, double& dpds_h, double& dhds_p, double& t, double& dtdh_s, double& dtds_h, double& dhds_t);
+extern "C" int    __stdcall HS_FLASH_G_CO2(double h, double s, double& v, double& vt, double& u);
+extern "C" void   __stdcall HS_FLASH_DERIV_G_CO2(double v, double vt, double u, double& dvdh_s, double& dvds_h, double& dhds_v, double& dudh_s, double& duds_h, double& dhds_u);
+extern "C" void   __stdcall HS_PT_FLASH_DERIV_G_CO2(double v, double vt, double u, double& p, double& dpdh_s, double& dpds_h, double& dhds_p, double& t, double& dtdh_s, double& dtds_h, double& dhds_t);
+extern "C" int    __stdcall SAT_HS_SPL_CO2(double h, double s, double& ps, double& ts, double& xvap, double& vl, double& vv, double& vvt, double& ul, double& uv);
 //
 // (v,h)-flash routines
-extern "C" int    __stdcall SAT_VH_SPL(double v, double h, double& ps, double& ts, double& xvap, double& vl, double& vv, double& vvt, double& ul, double& uv);
-extern "C" int    __stdcall VH_FLASH_L(double v, double h, double& u);
-extern "C" int    __stdcall VH_FLASH_G_T(double v, double vt, double h, double& u);
+extern "C" int    __stdcall SAT_VH_SPL_CO2(double v, double h, double& ps, double& ts, double& xvap, double& vl, double& vv, double& vvt, double& ul, double& uv);
+extern "C" int    __stdcall VH_FLASH_L_CO2(double v, double h, double& u);
+extern "C" int    __stdcall VH_FLASH_G_CO2_T(double v, double vt, double h, double& u);
 //
 // (v,u)-functions with transformed inputs
 extern "C" double __stdcall P_VU_L_CO2_T(double vs, double u);
@@ -141,16 +141,16 @@ extern "C" void __stdcall DIFF_CV_VU_G_CO2_T(double vt, double v, double u, doub
 extern "C" void __stdcall DIFF_W_VU_G_CO2_T(double vt, double v, double u, double& w, double& dwdv, double& dwdu, double& dudv);
 extern "C" void __stdcall DIFF_ETA_VU_G_CO2_T(double vt, double v, double u, double& eta, double& detadv, double& detadu, double& dudv);
 extern "C" void __stdcall DIFF_LAMBDA_VU_G_CO2_T(double vt, double v, double u, double& lambda, double& dlambdadv, double& dlambdadu, double& dudv);
-extern "C" void __stdcall DIFF_SAT_VU_SPL(double ps, double x, double vl, double vlt, double x1tmin, double x1tmax, double dvdu_vt, double K, double vv, double vvt, double ul, double uv, DERIV_TP& d_tp);
+extern "C" void __stdcall DIFF_SAT_VU_SPL_CO2(double ps, double x, double vl, double vlt, double x1tmin, double x1tmax, double dvdu_vt, double K, double vv, double vvt, double ul, double uv, DERIV_TP& d_tp);
 //
 // functions to be used in ireg_xx_SBTLCO2, ... (region boundaries)
 extern "C" double __stdcall U_V_TMAX_AUX_CO2_T(double vt);
 extern "C" double __stdcall U2_V_AUX_CO2_T(double vt);
 extern "C" double __stdcall V_U_PMAX_AUX_CO2(double u);
 extern "C" double __stdcall V1_U_SPL_CO2(double u);
-extern "C" int    __stdcall SAT_U1_SPL(double u, double& ps, double& ts, double& vl);
-extern "C" int    __stdcall SAT_V2_SPL_T(double vt, double& ps, double& ts, double& uv);
-extern "C" int    __stdcall SAT_VU_SPL(double v, double u, double& ps, double& ts, double& x, double& vl, double& vv, double& vvt, double& ul, double& uv);
+extern "C" int    __stdcall SAT_U1_SPL_CO2(double u, double& ps, double& ts, double& vl);
+extern "C" int    __stdcall SAT_V2_SPL_CO2_T(double vt, double& ps, double& ts, double& uv);
+extern "C" int    __stdcall SAT_VU_SPL_CO2(double v, double u, double& ps, double& ts, double& x, double& vl, double& vv, double& vvt, double& ul, double& uv);
 extern "C" double __stdcall T_P_UC_AUX_CO2(double p);
 extern "C" double __stdcall V_P_UC_CO2_T(double p);
 extern "C" double __stdcall S_H_PMAX_AUX_CO2(double h);
@@ -158,8 +158,8 @@ extern "C" double __stdcall S_H_PMIN_AUX_CO2(double h);
 extern "C" double __stdcall H_S_TMAX_AUX_CO2(double s);
 extern "C" double __stdcall H2_S_AUX_CO2(double s);
 extern "C" double __stdcall S1_H_AUX_CO2(double h);
-extern "C" int    __stdcall SAT_H1_SPL(double h, double& ps, double& ts, double& vl, double& ul, double& sl);
-extern "C" int    __stdcall SAT_S2_SPL(double s, double& ps, double& ts, double& vv, double& vvt, double& uv);
+extern "C" int    __stdcall SAT_H1_SPL_CO2(double h, double& ps, double& ts, double& vl, double& ul, double& sl);
+extern "C" int    __stdcall SAT_S2_SPL_CO2(double s, double& ps, double& ts, double& vv, double& vvt, double& uv);
 extern "C" double __stdcall H_S_UC_CO2(double s);
 extern "C" double __stdcall H_V_UC_CO2(double v);
 extern "C" double __stdcall V1_H_AUX_CO2(double h);
