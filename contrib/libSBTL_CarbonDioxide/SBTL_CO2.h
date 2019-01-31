@@ -175,7 +175,7 @@ typedef struct _DERIV_TP {
 } DERIV_TP;
 //
 ///////////////////////////////////////////////////////////////////////////////
-// - struct to be used by ireg_vu_SBTL_CO2 (DERIV_TP d_tp is used by DIFF_SAT_VU_SPL directly)
+// - struct to be used by ireg_vu_SBTL_CO2 (DERIV_TP d_tp is used by DIFF_SAT_VU_SPL_CO2 directly)
 // - this is also used by ireg_pv_SBTL_CO2 and ireg_ps_SBTL_CO2
 ///////////////////////////////////////////////////////////////////////////////
 //

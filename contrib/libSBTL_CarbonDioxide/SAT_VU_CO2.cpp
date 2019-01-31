@@ -43,8 +43,8 @@
 #else
 //#include "lapack.h"
 extern "C" void dgetrf_( int* m, int* n, double* a, int* lda, int* ipiv, int* info );
-extern "C" void dgetrs_( char* trans, int* n, int* nrhs, 
-             double* a, int* lda, int* ipiv, 
+extern "C" void dgetrs_( char* trans, int* n, int* nrhs,
+             double* a, int* lda, int* ipiv,
              double* b, int* ldb, int* info );
 #endif
 
@@ -90,7 +90,7 @@ extern "C" void   __stdcall DIFF_V1_U_SPL_CO2(double u, double& v, double& dvdu)
 //
 extern "C" void   __stdcall DIFF_TS_P_CO2(double p, double& ts, double& dtsdp);
 //
-SBTLAPI int __stdcall SAT_VU_SPL(double v, double u, double& ps, double& ts, double& xvap, double& vl, double& vv, double& vvt, double& ul, double& uv) throw()
+SBTLAPI int __stdcall SAT_VU_SPL_CO2(double v, double u, double& ps, double& ts, double& xvap, double& vl, double& vv, double& vvt, double& ul, double& uv) throw()
 {
     //declare variables and constants
     static const double tol_ps=1.e-10; //rel. tolerance in ps
@@ -140,7 +140,7 @@ SBTLAPI int __stdcall SAT_VU_SPL(double v, double u, double& ps, double& ts, dou
     int IPIV[5];            //indices of pivot elements
 
     xvap=ERR_VAL;
- 
+
     //vicinity of the critical point
     if(u>(mx*(v-v1x)+u1x)) {
         ps=pc;
@@ -169,7 +169,7 @@ SBTLAPI int __stdcall SAT_VU_SPL(double v, double u, double& ps, double& ts, dou
 
     int icount=0;
     do {
-        //populate right hand side and jacobian matrix - use dpt derivatives, rather than dp 
+        //populate right hand side and jacobian matrix - use dpt derivatives, rather than dp
         DIFF_V_U_PMAX_CO2(ul, x1tmin, dvdu_min);
         DIFF_V1_U_SPL_CO2(ul, x1tmax, dvdu_max);
         K=(x1zmax-x1zmin)/(x1tmax-x1tmin);
@@ -233,7 +233,7 @@ SBTLAPI int __stdcall SAT_VU_SPL(double v, double u, double& ps, double& ts, dou
 //Note: * In order to do this consistently ts(p), ps(t), v'(u), u"(v) must be implemented this way as well.
 //       (This is computationally more intensive than using ts(p).)
 //      * g is computed from g=u+p*v-t*s in this routine.
-SBTLAPI int __stdcall SAT_VU_SPL(double v, double u, double& ps, double& ts, double& xvap, double& vl, double& vv, double& vvt, double& ul, double& uv) throw()
+SBTLAPI int __stdcall SAT_VU_SPL_CO2(double v, double u, double& ps, double& ts, double& xvap, double& vl, double& vv, double& vvt, double& ul, double& uv) throw()
 {
     //declare variables and constants
     static const double tol_ps=1.e-10; //rel. tolerance in ps
@@ -285,7 +285,7 @@ SBTLAPI int __stdcall SAT_VU_SPL(double v, double u, double& ps, double& ts, dou
     int IPIV[4];        //indices of pivot elements
 
     xvap=ERR_VAL;
- 
+
     //vicinity of the critical point
     if(u>(mx*(v-v1x)+u1x)) {
         ps=pc;
@@ -313,7 +313,7 @@ SBTLAPI int __stdcall SAT_VU_SPL(double v, double u, double& ps, double& ts, dou
 
     int icount=0;
     do {
-        //populate right hand side and jacobian matrix 
+        //populate right hand side and jacobian matrix
         DIFF_V_U_PMAX_CO2(ul, x1tmin, dvdu_min);
         DIFF_V1_U_SPL_CO2(ul, x1tmax, dvdu_max);
         K=(x1zmax-x1zmin)/(x1tmax-x1tmin);
@@ -376,7 +376,7 @@ SBTLAPI int __stdcall SAT_VU_SPL(double v, double u, double& ps, double& ts, dou
     return I_OK;
 }
 */
-SBTLAPI void __stdcall DIFF_SAT_VU_SPL(double ps, double xvap, double vl, double vlt, double x1tmin, double x1tmax, double dvdu_vt, double K, double vv, double vvt, double ul, double uv, DERIV_TP& d_tp) throw()
+SBTLAPI void __stdcall DIFF_SAT_VU_SPL_CO2(double ps, double xvap, double vl, double vlt, double x1tmin, double x1tmax, double dvdu_vt, double K, double vv, double vvt, double ul, double uv, DERIV_TP& d_tp) throw()
 {
     double p_,t_;
     double dpdv_u_l, dpdu_v_l, dudv_p_l, dpdv_u_v, dpdu_v_v, dudv_p_v;
@@ -423,7 +423,7 @@ SBTLAPI void __stdcall DIFF_SAT_VU_SPL(double ps, double xvap, double vl, double
     d_tp.dtdu_v=-d_tp.dtdv_u/d_tp.dudv_pt;
 }
 //
-SBTLAPI int __stdcall SAT_U1_SPL(double u, double& ps, double& ts, double& vl) throw()
+SBTLAPI int __stdcall SAT_U1_SPL_CO2(double u, double& ps, double& ts, double& vl) throw()
 {
     static const double pc=7.37729837321;
     static const double tc=304.1282;
@@ -483,7 +483,7 @@ SBTLAPI int __stdcall SAT_U1_SPL(double u, double& ps, double& ts, double& vl) t
     return I_OK;
 }
 //
-SBTLAPI int __stdcall SAT_H1_SPL(double h, double& ps, double& ts, double& vl, double& ul, double& sl) throw()
+SBTLAPI int __stdcall SAT_H1_SPL_CO2(double h, double& ps, double& ts, double& vl, double& ul, double& sl) throw()
 {
     static const double pc=7.37729837321;
     static const double tc=304.1282;
@@ -567,7 +567,7 @@ SBTLAPI int __stdcall SAT_H1_SPL(double h, double& ps, double& ts, double& vl, d
     return I_OK;
 }
 //
-SBTLAPI int __stdcall SAT_V2_SPL_T(double vt, double& ps, double& ts, double& uv) throw()
+SBTLAPI int __stdcall SAT_V2_SPL_CO2_T(double vt, double& ps, double& ts, double& uv) throw()
 {
     static const double pc=7.37729837321;
     static const double tc=304.1282;
@@ -617,7 +617,7 @@ SBTLAPI int __stdcall SAT_V2_SPL_T(double vt, double& ps, double& ts, double& uv
     return I_OK;
 }
 //
-SBTLAPI int __stdcall SAT_S2_SPL(double s, double& ps, double& ts, double& vv, double& vvt, double& uv) throw()
+SBTLAPI int __stdcall SAT_S2_SPL_CO2(double s, double& ps, double& ts, double& vv, double& vvt, double& uv) throw()
 {
     static const double pc=7.37729837321;
     static const double tc=304.1282;
@@ -687,7 +687,7 @@ SBTLAPI int __stdcall SAT_S2_SPL(double s, double& ps, double& ts, double& vv, d
     return I_OK;
 }
 //
-SBTLAPI int __stdcall SAT_HS_SPL(double h, double s, double& ps, double& ts, double& xvap, double& vl, double& vv, double& vvt, double& ul, double& uv) throw()
+SBTLAPI int __stdcall SAT_HS_SPL_CO2(double h, double s, double& ps, double& ts, double& xvap, double& vl, double& vv, double& vvt, double& ul, double& uv) throw()
 {
     //declare variables and constants
     static const double tol_ps=1.e-10; //rel. tolerance in ps
@@ -739,7 +739,7 @@ SBTLAPI int __stdcall SAT_HS_SPL(double h, double s, double& ps, double& ts, dou
     int IPIV[5];            //indices of pivot elements
 
     xvap=ERR_VAL;
- 
+
     //vicinity of the critical point
     if(h>(mx*(s-s1x)+h1x)) {
         ps=pc;
@@ -767,7 +767,7 @@ SBTLAPI int __stdcall SAT_HS_SPL(double h, double s, double& ps, double& ts, dou
 
     int icount=0;
     do {
-        //populate right hand side and jacobian matrix - use dpt derivatives, rather than dp 
+        //populate right hand side and jacobian matrix - use dpt derivatives, rather than dp
         DIFF_V_U_PMAX_CO2(ul, x1tmin, dvdu_min);
         //scaling of s in region L is treated differently from p and t
         DIFF_V1_U_SPL_CO2(ul, x1tmax, dvdu_max);
@@ -842,7 +842,7 @@ SBTLAPI int __stdcall SAT_HS_SPL(double h, double s, double& ps, double& ts, dou
     return I_OK;
 }
 //
-SBTLAPI int __stdcall SAT_VH_SPL(double v, double h, double& ps, double& ts, double& xvap, double& vl, double& vv, double& vvt, double& ul, double& uv) throw()
+SBTLAPI int __stdcall SAT_VH_SPL_CO2(double v, double h, double& ps, double& ts, double& xvap, double& vl, double& vv, double& vvt, double& ul, double& uv) throw()
 {
     //declare variables and constants
     static const double tol_ps=1.e-10; //rel. tolerance in ps
@@ -892,7 +892,7 @@ SBTLAPI int __stdcall SAT_VH_SPL(double v, double h, double& ps, double& ts, dou
     int IPIV[5];            //indices of pivot elements
 
     xvap=ERR_VAL;
- 
+
     //vicinity of the critical point
     if(h>(mx*(v-v1x)+h1x)) {
         ps=pc;
@@ -922,7 +922,7 @@ SBTLAPI int __stdcall SAT_VH_SPL(double v, double h, double& ps, double& ts, dou
 
     int icount=0;
     do {
-        //populate right hand side and jacobian matrix - use dpt derivatives, rather than dp 
+        //populate right hand side and jacobian matrix - use dpt derivatives, rather than dp
         DIFF_V_U_PMAX_CO2(ul, x1tmin, dvdu_min);
         DIFF_V1_U_SPL_CO2(ul, x1tmax, dvdu_max);
         K=(x1zmax-x1zmin)/(x1tmax-x1tmin);
@@ -993,11 +993,11 @@ SBTLAPI int __stdcall SAT_VH_SPL(double v, double h, double& ps, double& ts, dou
     return I_OK;
 }
 //
-SBTLAPI double __stdcall PS_VU_SPL(double v, double u) throw()
+SBTLAPI double __stdcall PS_VU_SPL_CO2(double v, double u) throw()
 {
     double ps, ts, xvap, vl, vv, vvt, ul, uv;
 
-    int ierr=SAT_VU_SPL(v,  u, ps, ts, xvap, vl, vv, vvt, ul, uv);
+    int ierr=SAT_VU_SPL_CO2(v,  u, ps, ts, xvap, vl, vv, vvt, ul, uv);
     if(ierr==0) {
         return ps;
     } else {
@@ -1005,11 +1005,11 @@ SBTLAPI double __stdcall PS_VU_SPL(double v, double u) throw()
     }
 }
 //
-SBTLAPI double __stdcall TS_VU_SPL(double v, double u) throw()
+SBTLAPI double __stdcall TS_VU_SPL_CO2(double v, double u) throw()
 {
     double ps, ts, xvap, vl, vv, vvt, ul, uv;
 
-    int ierr=SAT_VU_SPL(v,  u, ps, ts, xvap, vl, vv, vvt, ul, uv);
+    int ierr=SAT_VU_SPL_CO2(v,  u, ps, ts, xvap, vl, vv, vvt, ul, uv);
     if(ierr==0) {
         return ts;
     } else {
@@ -1017,11 +1017,11 @@ SBTLAPI double __stdcall TS_VU_SPL(double v, double u) throw()
     }
 }
 //
-SBTLAPI double __stdcall X_VU_SPL(double v, double u) throw()
+SBTLAPI double __stdcall X_VU_SPL_CO2(double v, double u) throw()
 {
     double ps, ts, xvap, vl, vv, vvt, ul, uv;
 
-    int ierr=SAT_VU_SPL(v,  u, ps, ts, xvap, vl, vv, vvt, ul, uv);
+    int ierr=SAT_VU_SPL_CO2(v,  u, ps, ts, xvap, vl, vv, vvt, ul, uv);
     if(ierr==0) {
         return xvap;
     } else {

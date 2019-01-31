@@ -60,7 +60,7 @@ extern "C" void __stdcall DIFF_S_VU_G_CO2_T(double vt, double v, double u, doubl
 extern "C" void __stdcall DIFF_S_VU_G_CO2_TT(double vt, double u, double& s, double& dsdv, double& dsdu, double& dudv);
 extern "C" void __stdcall DIFF_P_VU_G_CO2_TT(double vt, double u, double& p, double& dpdv, double& dpdu, double& dudv);
 //
-SBTLAPI int __stdcall PS_FLASH_L(double p, double s, double& v, double& u) throw()
+SBTLAPI int __stdcall PS_FLASH_L_CO2(double p, double s, double& v, double& u) throw()
 {
     double vs,x1tmin,x1tmax,v_u_pmax,dvdu_pmax,dvdu_max;
     double dvdu_min,dvdu_vt,K;
@@ -113,7 +113,7 @@ SBTLAPI int __stdcall PS_FLASH_L(double p, double s, double& v, double& u) throw
     return I_OK;
 }
 //
-SBTLAPI void __stdcall PS_FLASH_DERIV_L(double v, double u, double& dvdp_s, double& dvds_p, double& dpds_v, double& dudp_s, double& duds_p, double& dpds_u) throw()
+SBTLAPI void __stdcall PS_FLASH_DERIV_L_CO2(double v, double u, double& dvdp_s, double& dvds_p, double& dpds_v, double& dudp_s, double& duds_p, double& dpds_u) throw()
 {
     double vs,x1tmin,x1tmax,v_u_pmax,dvdu_pmax,dvdu_max;
     double dvdu_min,dvdu_vt,K,p_,s_;
@@ -142,7 +142,7 @@ SBTLAPI void __stdcall PS_FLASH_DERIV_L(double v, double u, double& dvdp_s, doub
     dpds_u=-duds_p/dudp_s;
 }
 //
-SBTLAPI int __stdcall PS_FLASH_G(double p, double s, double& v, double& vt, double& u) throw()
+SBTLAPI int __stdcall PS_FLASH_G_CO2(double p, double s, double& v, double& vt, double& u) throw()
 {
     static const double pc=7.37729837321;
     static const double vc=1./467.60000128174;
@@ -185,7 +185,7 @@ SBTLAPI int __stdcall PS_FLASH_G(double p, double s, double& v, double& vt, doub
     return I_OK;
 }
 //
-SBTLAPI void __stdcall PS_FLASH_DERIV_G(double v, double vt, double u, double& dvdp_s, double& dvds_p, double& dpds_v, double& dudp_s, double& duds_p, double& dpds_u) throw()
+SBTLAPI void __stdcall PS_FLASH_DERIV_G_CO2(double v, double vt, double u, double& dvdp_s, double& dvds_p, double& dpds_v, double& dudp_s, double& duds_p, double& dpds_u) throw()
 {
     double dsdv_u, dsdu_v, dudv_s;
     double dpdv_u, dpdu_v, dudv_p;
@@ -204,7 +204,7 @@ SBTLAPI void __stdcall PS_FLASH_DERIV_G(double v, double vt, double u, double& d
     dpds_u=-duds_p/dudp_s;
 }
 //
-SBTLAPI int PS_FLASH_G_T(double p, double s, double& vt, double& u) throw()
+SBTLAPI int PS_FLASH_G_CO2_T(double p, double s, double& vt, double& u) throw()
 {
     static const double pc=7.37729837321;
     static const double vc=1./467.60000128174;
