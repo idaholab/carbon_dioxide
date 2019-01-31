@@ -3,26 +3,26 @@
 
 extern "C" double P_VU_L_CO2(double v, double u);
 extern "C" double T_VU_L_CO2(double v, double u);
-extern "C" int PT_FLASH_L(double p, double t, double & v, double & u);
-extern "C" int PT_FLASH_DERIV_L(double p,
-                                double t,
-                                double & v,
-                                double & dvdp_t,
-                                double & dvdt_p,
-                                double & dpdt_v,
-                                double & u,
-                                double & dudp_t,
-                                double & dudt_p,
-                                double & dpdt_u);
-extern "C" int PS_FLASH_L(double p, double s, double & v, double & u);
-extern "C" void PS_FLASH_DERIV_L(double v,
-                                 double u,
-                                 double & dvdp_s,
-                                 double & dvds_p,
-                                 double & dpds_v,
-                                 double & dudp_s,
-                                 double & duds_p,
-                                 double & dpds_u);
+extern "C" int PT_FLASH_L_CO2(double p, double t, double & v, double & u);
+extern "C" int PT_FLASH_DERIV_L_CO2(double p,
+                                    double t,
+                                    double & v,
+                                    double & dvdp_t,
+                                    double & dvdt_p,
+                                    double & dpdt_v,
+                                    double & u,
+                                    double & dudp_t,
+                                    double & dudt_p,
+                                    double & dpdt_u);
+extern "C" int PS_FLASH_L_CO2(double p, double s, double & v, double & u);
+extern "C" void PS_FLASH_DERIV_L_CO2(double v,
+                                     double u,
+                                     double & dvdp_s,
+                                     double & dvds_p,
+                                     double & dpds_v,
+                                     double & dudp_s,
+                                     double & duds_p,
+                                     double & dpds_u);
 extern "C" double W_VU_L_CO2(double v, double u);
 extern "C" double CP_VU_L_CO2(double v, double u);
 extern "C" double CV_VU_L_CO2(double v, double u);
@@ -31,15 +31,15 @@ extern "C" double LAMBDA_VU_L_CO2(double v, double u);
 extern "C" double S_VU_L_CO2(double v, double u);
 extern "C" double G_VU_L_CO2(double v, double e);
 extern "C" double U_VP_L_CO2(double v, double p);
-extern "C" int HS_FLASH_L(double h, double s, double & v, double & u);
-extern "C" void HS_FLASH_DERIV_L(double v,
-                                 double u,
-                                 double & dvdh_s,
-                                 double & dvds_h,
-                                 double & dhds_v,
-                                 double & dudh_s,
-                                 double & duds_h,
-                                 double & dhds_u);
+extern "C" int HS_FLASH_L_CO2(double h, double s, double & v, double & u);
+extern "C" void HS_FLASH_DERIV_L_CO2(double v,
+                                     double u,
+                                     double & dvdh_s,
+                                     double & dvds_h,
+                                     double & dhds_v,
+                                     double & dudh_s,
+                                     double & duds_h,
+                                     double & dhds_u);
 extern "C" void
 DIFF_U_VP_L_CO2(double v, double p, double & u, double & dudv_p, double & dudp_v, double & dpdv_u);
 extern "C" double SIGMA_TS_CO2(double t);
@@ -54,8 +54,8 @@ DIFF_S_VU_L_CO2(double v, double u, double & s, double & dsdv, double & dsdu, do
 extern "C" void
 DIFF_W_VU_L_CO2(double v, double u, double & w, double & dwdv, double & dwdu, double & dudv);
 
-extern "C" int VH_FLASH_L(double v, double h, double & u);
-extern "C" int PH_FLASH_L(double p, double h, double & v, double & u);
+extern "C" int VH_FLASH_L_CO2(double v, double h, double & u);
+extern "C" int PH_FLASH_L_CO2(double p, double h, double & v, double & u);
 
 registerMooseObject("CarbonDioxideApp", CarbonDioxideLiquidFluidProperties);
 
@@ -69,7 +69,8 @@ validParams<CarbonDioxideLiquidFluidProperties>()
   return params;
 }
 
-CarbonDioxideLiquidFluidProperties::CarbonDioxideLiquidFluidProperties(const InputParameters & parameters)
+CarbonDioxideLiquidFluidProperties::CarbonDioxideLiquidFluidProperties(
+    const InputParameters & parameters)
   : SinglePhaseFluidProperties(parameters),
     LiquidFluidPropertiesInterface(),
     NaNInterface(this),
@@ -138,7 +139,7 @@ Real
 CarbonDioxideLiquidFluidProperties::e_from_v_h(Real v, Real h) const
 {
   double e;
-  VH_FLASH_L(v, h * _to_kJ, e);
+  VH_FLASH_L_CO2(v, h * _to_kJ, e);
   return e * _to_J;
 }
 
@@ -203,7 +204,7 @@ Real
 CarbonDioxideLiquidFluidProperties::s_from_h_p(Real h, Real p) const
 {
   double v, e;
-  PH_FLASH_L(p * _to_MPa, h * _to_kJ, v, e);
+  PH_FLASH_L_CO2(p * _to_MPa, h * _to_kJ, v, e);
   return s_from_v_e(v, e * _to_J);
 }
 
@@ -212,7 +213,7 @@ CarbonDioxideLiquidFluidProperties::s_from_h_p(
     Real h, Real p, Real & s, Real & ds_dh, Real & ds_dp) const
 {
   double v, e;
-  PH_FLASH_L(p * _to_MPa, h * _to_kJ, v, e);
+  PH_FLASH_L_CO2(p * _to_MPa, h * _to_kJ, v, e);
   e *= _to_J;
   Real dummy_p, dp_dv, dp_de;
   p_from_v_e(v, e, dummy_p, dp_dv, dp_de);
@@ -236,7 +237,7 @@ Real
 CarbonDioxideLiquidFluidProperties::rho_from_p_T(Real p, Real T) const
 {
   double v, e;
-  const unsigned int ierr = PT_FLASH_L(p * _to_MPa, T, v, e);
+  const unsigned int ierr = PT_FLASH_L_CO2(p * _to_MPa, T, v, e);
   if (ierr != I_OK)
     return getNaN();
 
@@ -250,7 +251,7 @@ CarbonDioxideLiquidFluidProperties::rho_from_p_T(
   double v, dv_dp, dv_dT, dp_dT_v;
   double e, de_dp, de_dT, dp_dT_e;
   const unsigned int ierr =
-      PT_FLASH_DERIV_L(p * _to_MPa, T, v, dv_dp, dv_dT, dp_dT_v, e, de_dp, de_dT, dp_dT_e);
+      PT_FLASH_DERIV_L_CO2(p * _to_MPa, T, v, dv_dp, dv_dT, dp_dT_v, e, de_dp, de_dT, dp_dT_e);
   if (ierr != I_OK)
   {
     rho = getNaN();
@@ -291,7 +292,7 @@ Real
 CarbonDioxideLiquidFluidProperties::h_from_p_T(Real p, Real T) const
 {
   double v, e;
-  const unsigned int ierr = PT_FLASH_L(p * _to_MPa, T, v, e);
+  const unsigned int ierr = PT_FLASH_L_CO2(p * _to_MPa, T, v, e);
   if (ierr != I_OK)
     return getNaN();
 
@@ -305,7 +306,7 @@ CarbonDioxideLiquidFluidProperties::h_from_p_T(
   double v, dvdp_T, dvdT_p, dpdT_v;
   double e, dedp_T, dedT_p, dpdT_e;
   const unsigned int ierr =
-      PT_FLASH_DERIV_L(p * _to_MPa, T, v, dvdp_T, dvdT_p, dpdT_v, e, dedp_T, dedT_p, dpdT_e);
+      PT_FLASH_DERIV_L_CO2(p * _to_MPa, T, v, dvdp_T, dvdT_p, dpdT_v, e, dedp_T, dedT_p, dpdT_e);
   if (ierr != I_OK)
   {
     h = getNaN();
@@ -323,7 +324,7 @@ Real
 CarbonDioxideLiquidFluidProperties::p_from_h_s(Real h, Real s) const
 {
   double v, e;
-  HS_FLASH_L(h * _to_kJ, s * _to_kJ, v, e);
+  HS_FLASH_L_CO2(h * _to_kJ, s * _to_kJ, v, e);
   return P_VU_L_CO2(v, e) * _to_Pa;
 }
 
@@ -332,10 +333,10 @@ CarbonDioxideLiquidFluidProperties::p_from_h_s(
     Real h, Real s, Real & p, Real & dp_dh, Real & dp_ds) const
 {
   double v, e;
-  HS_FLASH_L(h * _to_kJ, s * _to_kJ, v, e);
+  HS_FLASH_L_CO2(h * _to_kJ, s * _to_kJ, v, e);
 
   double dv_dh, dv_ds, dh_ds_v, de_dh, de_ds, dh_ds_e;
-  HS_FLASH_DERIV_L(v, e, dv_dh, dv_ds, dh_ds_v, de_dh, de_ds, dh_ds_e);
+  HS_FLASH_DERIV_L_CO2(v, e, dv_dh, dv_ds, dh_ds_v, de_dh, de_ds, dh_ds_e);
 
   double dp_dv, dp_de;
   p_from_v_e(v, e * _to_J, p, dp_dv, dp_de);
@@ -354,7 +355,7 @@ Real
 CarbonDioxideLiquidFluidProperties::rho_from_p_s(Real p, Real s) const
 {
   double v, e;
-  const unsigned int ierr = PS_FLASH_L(p * _to_MPa, s * _to_kJ, v, e);
+  const unsigned int ierr = PS_FLASH_L_CO2(p * _to_MPa, s * _to_kJ, v, e);
   if (ierr != I_OK)
     return getNaN();
 
@@ -366,7 +367,7 @@ CarbonDioxideLiquidFluidProperties::rho_from_p_s(
     Real p, Real s, Real & rho, Real & drho_dp, Real & drho_ds) const
 {
   double v, e;
-  const unsigned int ierr = PS_FLASH_L(p * _to_MPa, s * _to_kJ, v, e);
+  const unsigned int ierr = PS_FLASH_L_CO2(p * _to_MPa, s * _to_kJ, v, e);
   if (ierr != I_OK)
   {
     rho = getNaN();
@@ -376,7 +377,7 @@ CarbonDioxideLiquidFluidProperties::rho_from_p_s(
   }
 
   double dv_dp, dv_ds, dp_ds_v, de_dp, de_ds, dp_ds_e;
-  PS_FLASH_DERIV_L(v, e, dv_dp, dv_ds, dp_ds_v, de_dp, de_ds, dp_ds_e);
+  PS_FLASH_DERIV_L_CO2(v, e, dv_dp, dv_ds, dp_ds_v, de_dp, de_ds, dp_ds_e);
 
   rho = 1. / v;
   const double drho_dv = -1. / v / v;

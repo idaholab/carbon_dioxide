@@ -128,7 +128,7 @@ SBTLAPI void __stdcall ireg_vu_SBTLCO2(double v, double u, STR_vu_SBTL_CO2& r) t
                     } else if(u<(u2_-0.1)) {
                         vmax=v1tr+(u-u1tr)*qtr*(v2tr-v1tr);
                         if(v<=vmax) {
-                            ierr=SAT_VU_SPL(v,u,r.ps,r.ts,r.x,r.v1,r.v2,r.v2t,r.u1,r.u2);
+                            ierr=SAT_VU_SPL_CO2(v,u,r.ps,r.ts,r.x,r.v1,r.v2,r.v2t,r.u1,r.u2);
                             if(ierr==I_OK) {
                                 r.ireg=IREG_TP;
 #if defined(SBTL_USE_C_AUX)
@@ -177,13 +177,13 @@ SBTLAPI void __stdcall ireg_vu_SBTLCO2(double v, double u, STR_vu_SBTL_CO2& r) t
                             }
                         }
                     } else {
-                        ierr=SAT_V2_SPL_T(r.vt, ps_, ts_, u2_);
+                        ierr=SAT_V2_SPL_CO2_T(r.vt, ps_, ts_, u2_);
                         if(u>=u2_) {
                             r.ireg=IREG_G;
                         } else {
                             vmax=v1tr+(u-u1tr)*qtr*(v2tr-v1tr);
                             if(v<=vmax) {
-                                ierr=SAT_VU_SPL(v,u,r.ps,r.ts,r.x,r.v1,r.v2,r.v2t,r.u1,r.u2);
+                                ierr=SAT_VU_SPL_CO2(v,u,r.ps,r.ts,r.x,r.v1,r.v2,r.v2t,r.u1,r.u2);
                                 if(ierr==I_OK) {
                                     r.ireg=IREG_TP;
 #if defined(SBTL_USE_C_AUX)
@@ -245,7 +245,7 @@ SBTLAPI void __stdcall ireg_vu_SBTLCO2(double v, double u, STR_vu_SBTL_CO2& r) t
         } else {
             vmax=v1tr+(u-u1tr)*qtr*(v2tr-v1tr);
             if(v<=vmax) {
-                ierr=SAT_VU_SPL(v,u,r.ps,r.ts,r.x,r.v1,r.v2,r.v2t,r.u1,r.u2);
+                ierr=SAT_VU_SPL_CO2(v,u,r.ps,r.ts,r.x,r.v1,r.v2,r.v2t,r.u1,r.u2);
                 if(ierr==I_OK) {
                     r.ireg=IREG_TP;
 #if defined(SBTL_USE_C_AUX)
@@ -305,7 +305,7 @@ SBTLAPI void __stdcall ireg_vu_SBTLCO2(double v, double u, STR_vu_SBTL_CO2& r) t
                 if(v>(r.v1+0.0005)) {
                     vmax=v1tr+(u-u1tr)*qtr*(v2tr-v1tr);
                     if(v<=vmax) {
-                        ierr=SAT_VU_SPL(v,u,r.ps,r.ts,r.x,r.v1,r.v2,r.v2t,r.u1,r.u2);
+                        ierr=SAT_VU_SPL_CO2(v,u,r.ps,r.ts,r.x,r.v1,r.v2,r.v2t,r.u1,r.u2);
                         if(ierr==I_OK) {
                             r.ireg=IREG_TP;
 #if defined(SBTL_USE_C_AUX)
@@ -399,11 +399,11 @@ SBTLAPI void __stdcall ireg_vu_SBTLCO2(double v, double u, STR_vu_SBTL_CO2& r) t
                     r.dz_l.d2vtdu2_v=(x1zmax-x1zmin)*((-d2vdu2_min*(x1tmax-x1tmin)-dvdu_min*(dvdu_max-dvdu_min)-(-dvdu_min*(dvdu_max-dvdu_min)+(v-x1tmin)*(d2vdu2_max-d2vdu2_min)))*N-Z*2.*(x1tmax-x1tmin)*(dvdu_max-dvdu_min))/(N*N);
 #endif
                 } else {
-                    ierr=SAT_U1_SPL(u, ps_, ts_, r.v1);
+                    ierr=SAT_U1_SPL_CO2(u, ps_, ts_, r.v1);
                     if(v>r.v1) {
                         vmax=v1tr+(u-u1tr)*qtr*(v2tr-v1tr);
                         if(v<=vmax) {
-                            ierr=SAT_VU_SPL(v,u,r.ps,r.ts,r.x,r.v1,r.v2,r.v2t,r.u1,r.u2);
+                            ierr=SAT_VU_SPL_CO2(v,u,r.ps,r.ts,r.x,r.v1,r.v2,r.v2t,r.u1,r.u2);
                             if(ierr==I_OK) {
                                 r.ireg=IREG_TP;
 #if defined(SBTL_USE_C_AUX)
@@ -572,11 +572,11 @@ SBTLAPI void __stdcall ireg_pv_SBTLCO2(double p, double v, STR_vu_SBTL_CO2& r) t
         ireg=IREG_ERR;
     } else if(p<pc) {
         ts=TS_P_CO2(p);
-        PT_FLASH_L(p, ts, v1, u1);
+        PT_FLASH_L_CO2(p, ts, v1, u1);
         if(v<=v1) {
             ireg=IREG_L;
         } else {
-            PT_FLASH_G(p, ts, v2, v2t, u2);
+            PT_FLASH_G_CO2(p, ts, v2, v2t, u2);
             if(v>=v2) {
                 ireg=IREG_G;
             } else {
@@ -631,7 +631,7 @@ SBTLAPI void __stdcall ireg_ps_SBTLCO2(double p, double s, STR_vu_SBTL_CO2& r) t
         ireg=IREG_ERR;
     } else if(p<pc) {
         ts=TS_P_CO2(p);
-        PT_FLASH_L(p, ts, v1, u1);
+        PT_FLASH_L_CO2(p, ts, v1, u1);
         x1tmin=V_U_PMAX_CO2(u1);
         x1tmax=V1_U_SPL_CO2(u1);
         v1s=(v1-x1tmin)*(x1zmax-x1zmin)/(x1tmax-x1tmin)+x1zmin;
@@ -639,7 +639,7 @@ SBTLAPI void __stdcall ireg_ps_SBTLCO2(double p, double s, STR_vu_SBTL_CO2& r) t
         if(s<=s1) {
             ireg=IREG_L;
         } else {
-            PT_FLASH_G(p, ts, v2, v2t, u2);
+            PT_FLASH_G_CO2(p, ts, v2, v2t, u2);
             s2=S_VU_G_CO2_T(v2t,u2);
             if(s>=s2) {
                 ireg=IREG_G;
@@ -659,10 +659,10 @@ SBTLAPI void __stdcall ireg_ps_SBTLCO2(double p, double s, STR_vu_SBTL_CO2& r) t
 
     switch(ireg) {
     case(IREG_L):
-        PS_FLASH_L(p, s, v, u);
+        PS_FLASH_L_CO2(p, s, v, u);
         break;
     case(IREG_G):
-        PS_FLASH_G(p, s, v, vt, u);
+        PS_FLASH_G_CO2(p, s, v, vt, u);
         break;
     case(IREG_TP):
         x=(s-s1)/(s2-s1);
@@ -695,12 +695,12 @@ SBTLAPI void __stdcall ireg_ph_SBTLCO2(double p, double h, STR_vu_SBTL_CO2& r) t
         ireg=IREG_ERR;
     } else if(p<pc) {
         ts=TS_P_CO2(p);
-        PT_FLASH_L(p, ts, v1, u1);
+        PT_FLASH_L_CO2(p, ts, v1, u1);
         h1=u1+p*v1*1.e3;
         if(h<=h1) {
             ireg=IREG_L;
         } else {
-            PT_FLASH_G(p, ts, v2, v2t, u2);
+            PT_FLASH_G_CO2(p, ts, v2, v2t, u2);
             h2=u2+p*v2*1.e3;
             if(h>=h2) {
                 ireg=IREG_G;
@@ -721,10 +721,10 @@ SBTLAPI void __stdcall ireg_ph_SBTLCO2(double p, double h, STR_vu_SBTL_CO2& r) t
 
     switch(ireg) {
     case(IREG_L):
-        PH_FLASH_L(p, h, v, u);
+        PH_FLASH_L_CO2(p, h, v, u);
         break;
     case(IREG_G):
-        PH_FLASH_G(p, h, v, vt, u);
+        PH_FLASH_G_CO2(p, h, v, vt, u);
         break;
     case(IREG_TP):
         x=(h-h1)/(h2-h1);
@@ -782,7 +782,7 @@ SBTLAPI void __stdcall ireg_hs_SBTLCO2(double h, double s, STR_vu_SBTL_CO2& r) t
                         ireg=IREG_TP;
                     }
                 } else {
-                    SAT_H1_SPL(h, ps, ts, v1, u1, s1);
+                    SAT_H1_SPL_CO2(h, ps, ts, v1, u1, s1);
                     if(s<s1) {
                         ireg=IREG_L;
                     } else {
@@ -807,7 +807,7 @@ SBTLAPI void __stdcall ireg_hs_SBTLCO2(double h, double s, STR_vu_SBTL_CO2& r) t
                     } else if(h>(h2+0.01)) {
                         ireg=IREG_G;
                     } else {
-                        SAT_S2_SPL(s, ps, ts, v2, v2t, u2);
+                        SAT_S2_SPL_CO2(s, ps, ts, v2, v2t, u2);
                         h2=u2+ps*v2*1.e3;
                         if(h>=h2) {
                             ireg=IREG_G;
@@ -839,13 +839,13 @@ SBTLAPI void __stdcall ireg_hs_SBTLCO2(double h, double s, STR_vu_SBTL_CO2& r) t
 
     switch(ireg) {
     case(IREG_L):
-        HS_FLASH_L(h, s, v, u);
+        HS_FLASH_L_CO2(h, s, v, u);
         break;
     case(IREG_G):
-        HS_FLASH_G(h, s, v, vt, u);
+        HS_FLASH_G_CO2(h, s, v, vt, u);
         break;
     case(IREG_TP):
-        SAT_HS_SPL(h, s, ps, ts, x, v1, v2, v2t, u1, u2);
+        SAT_HS_SPL_CO2(h, s, ps, ts, x, v1, v2, v2t, u1, u2);
         v=v1+x*(v2-v1);
         u=u1+x*(u2-u1);
         break;
@@ -898,7 +898,7 @@ SBTLAPI void __stdcall ireg_vh_SBTLCO2(double v, double h, STR_vu_SBTL_CO2& r) t
                         ireg=IREG_TP;
                     }
                 } else {
-                    SAT_H1_SPL(h, ps, ts, v1, u1, s1);
+                    SAT_H1_SPL_CO2(h, ps, ts, v1, u1, s1);
                     if(v<v1) {
                         ireg=IREG_L;
                     } else {
@@ -924,7 +924,7 @@ SBTLAPI void __stdcall ireg_vh_SBTLCO2(double v, double h, STR_vu_SBTL_CO2& r) t
                     } else if(h>(h2+0.01)) {
                         ireg=IREG_G;
                     } else {
-                        SAT_V2_SPL_T(vt, ps, ts, u2);
+                        SAT_V2_SPL_CO2_T(vt, ps, ts, u2);
                         h2=u2+ps*v*1.e3;
                         if(h>=h2) {
                             ireg=IREG_G;
@@ -957,14 +957,14 @@ SBTLAPI void __stdcall ireg_vh_SBTLCO2(double v, double h, STR_vu_SBTL_CO2& r) t
 
     switch(ireg) {
     case(IREG_L):
-        VH_FLASH_L(v, h, u);
+        VH_FLASH_L_CO2(v, h, u);
         break;
     case(IREG_G):
         if(vt==ERR_VAL) vt=log(v);
-        VH_FLASH_G_T(v, vt, h, u);
+        VH_FLASH_G_CO2_T(v, vt, h, u);
         break;
     case(IREG_TP):
-        SAT_VH_SPL(v, h, ps, ts, x, v1, v2, v2t, u1, u2);
+        SAT_VH_SPL_CO2(v, h, ps, ts, x, v1, v2, v2t, u1, u2);
         h1=u1+ps*v1*1.e3;
         h2=u2+ps*v2*1.e3;
         x=(h-h1)/(h2-h1);
@@ -1148,7 +1148,7 @@ SBTLAPI int __stdcall flash_deriv_vu_SBTLCO2(double v, double u, int& ireg, doub
         break;
     case(IREG_TP):
         //Note: Derivatives of g, s, cp, cv, w, eta, and lambda are not calculated in the two-phase region currently.
-        DIFF_SAT_VU_SPL(str.ps, str.x, str.v1, str.v1s, str.dz_1.x1tmin, str.dz_1.x1tmax, str.dz_1.dvdu_vt, str.dz_1.K, str.v2, str.v2t, str.u1, str.u2, str.d_tp);
+        DIFF_SAT_VU_SPL_CO2(str.ps, str.x, str.v1, str.v1s, str.dz_1.x1tmin, str.dz_1.x1tmax, str.dz_1.dvdu_vt, str.dz_1.K, str.v2, str.v2t, str.u1, str.u2, str.d_tp);
         dudv_t=dudv_p=str.d_tp.dudv_pt;
         p=str.ps;
         t=str.ts;
@@ -1214,9 +1214,9 @@ SBTLAPI int __stdcall flash_pt_SBTLCO2(double p, double t, double& v, double& u)
 
     switch(ireg) {
     case(IREG_L):
-        return PT_FLASH_L(p, t, v, u);
+        return PT_FLASH_L_CO2(p, t, v, u);
     case(IREG_G):
-        return PT_FLASH_G(p, t, v, vt, u);
+        return PT_FLASH_G_CO2(p, t, v, vt, u);
     default:
         return I_ERR;
     }
@@ -1232,9 +1232,9 @@ SBTLAPI int __stdcall flash_deriv_pt_SBTLCO2(double p, double t, double& v, doub
 
     switch(ireg) {
     case(IREG_L):
-        return PT_FLASH_DERIV_L(p, t, v, dvdp_t, dvdt_p, dpdt_v, u, dudp_t, dudt_p, dpdt_u);
+        return PT_FLASH_DERIV_L_CO2(p, t, v, dvdp_t, dvdt_p, dpdt_v, u, dudp_t, dudt_p, dpdt_u);
     case(IREG_G):
-        return PT_FLASH_DERIV_G(p, t, v, vt, dvdp_t, dvdt_p, dpdt_v, u, dudp_t, dudt_p, dpdt_u);
+        return PT_FLASH_DERIV_G_CO2(p, t, v, vt, dvdp_t, dvdt_p, dpdt_v, u, dudp_t, dudt_p, dpdt_u);
     default:
         return I_ERR;
     }
@@ -1261,8 +1261,8 @@ SBTLAPI int __stdcall flash_px_SBTLCO2(double p, double x, double& v, double& u)
         return I_OK;
     } else {
         ts=TS_P_CO2(p);
-        PT_FLASH_L(p, ts, v1, u1);
-        PT_FLASH_G(p, ts, v2, v2t, u2);
+        PT_FLASH_L_CO2(p, ts, v1, u1);
+        PT_FLASH_G_CO2(p, ts, v2, v2t, u2);
         v=v1+x*(v2-v1);
         u=u1+x*(u2-u1);
         return I_OK;
@@ -1289,8 +1289,8 @@ SBTLAPI int __stdcall flash_tx_SBTLCO2(double t, double x, double& v, double& u)
         return I_OK;
     } else {
         ps=PS_T_INV_CO2(t);
-        PT_FLASH_L(ps, t, v1, u1);
-        PT_FLASH_G(ps, t, v2, v2t, u2);
+        PT_FLASH_L_CO2(ps, t, v1, u1);
+        PT_FLASH_G_CO2(ps, t, v2, v2t, u2);
         v=v1+x*(v2-v1);
         u=u1+x*(u2-u1);
         return I_OK;
@@ -1326,8 +1326,8 @@ SBTLAPI double __stdcall hvap_t_SBTLCO2(double t) throw()
     if((tc-t)<0.2) return 0.;
     else {
         ps=PS_T_INV_CO2(t);
-        if(PT_FLASH_L(ps,t,vl,ul)) return ERR_VAL;
-        if(PT_FLASH_G(ps,t,vv,vvt,uv)) return ERR_VAL;
+        if(PT_FLASH_L_CO2(ps,t,vl,ul)) return ERR_VAL;
+        if(PT_FLASH_G_CO2(ps,t,vv,vvt,uv)) return ERR_VAL;
         hl=ul+ps*vl*1.e3;
         hv=uv+ps*vv*1.e3;
         return hv-hl;
@@ -1381,18 +1381,18 @@ SBTLAPI int __stdcall flash_deriv_ps_SBTLCO2(double p, double s, double& v, doub
     case(IREG_L):
         v=str.v_;
         u=str.u_;
-        PS_FLASH_DERIV_L(p, s, v, u, dvdp_s, dvds_p, dpds_v, dudp_s, duds_p, dpds_u);
+        PS_FLASH_DERIV_L_CO2(p, s, v, u, dvdp_s, dvds_p, dpds_v, dudp_s, duds_p, dpds_u);
         return I_OK;
     case(IREG_G):
         v=str.v_;
         vt=str.vt;
         u=str.u_;
-        PS_FLASH_DERIV_G(p, s, v, vt, u, dvdp_s, dvds_p, dpds_v, dudp_s, duds_p, dpds_u);
+        PS_FLASH_DERIV_G_CO2(p, s, v, vt, u, dvdp_s, dvds_p, dpds_v, dudp_s, duds_p, dpds_u);
         return I_OK;
     case(IREG_TP):
         v=str.v_;
         u=str.u_;
-        if(str_state<STR_DTP) DIFF_SAT_VU_SPL(str.ps, str.x, str.v1, str.v1s, str.dz_1.x1tmin, str.dz_1.x1tmax, str.dz_1.dvdu_vt, str.dz_1.K, str.v2, str.v2t, str.u1, str.u2, str.d_tp);
+        if(str_state<STR_DTP) DIFF_SAT_VU_SPL_CO2(str.ps, str.x, str.v1, str.v1s, str.dz_1.x1tmin, str.dz_1.x1tmax, str.dz_1.dvdu_vt, str.dz_1.K, str.v2, str.v2t, str.u1, str.u2, str.d_tp);
         //p derivatives
         dpdv_u=str.d_tp.dpdv_u;
         dpdu_v=str.d_tp.dpdu_v;

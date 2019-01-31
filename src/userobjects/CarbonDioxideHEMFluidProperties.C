@@ -88,10 +88,10 @@ CarbonDioxideHEMFluidProperties::h(Real pressure, Real temperature, Real quality
   Real t = temperature;
 
   if (quality <= 0.0)
-    ierr = PT_FLASH_L(p, t, v, u);
+    ierr = PT_FLASH_L_CO2(p, t, v, u);
 
   else if (quality >= 1.0)
-    ierr = PT_FLASH_G(p, t, v, vt, u);
+    ierr = PT_FLASH_G_CO2(p, t, v, vt, u);
 
   else
   {
@@ -366,18 +366,18 @@ CarbonDioxideHEMFluidProperties::rho(Real pressure, Real temperature, Real quali
 
   if (quality <= 0.0)
   {
-    ierr = PT_FLASH_L(p, t, vl, ul);
+    ierr = PT_FLASH_L_CO2(p, t, vl, ul);
     density = 1.0 / vl;
   }
   else if (quality >= 1.0)
   {
-    ierr = PT_FLASH_G(p, t, v, vt, u);
+    ierr = PT_FLASH_G_CO2(p, t, v, vt, u);
     density = 1.0 / v;
   }
   else
   {
-    ierr = PT_FLASH_L(p, t, vl, ul);
-    ierr += PT_FLASH_G(p, t, v, vt, u);
+    ierr = PT_FLASH_L_CO2(p, t, vl, ul);
+    ierr += PT_FLASH_G_CO2(p, t, v, vt, u);
     density = 1.0 / ((1.0 - quality) * vl + quality * v);
   }
 
@@ -389,10 +389,10 @@ CarbonDioxideHEMFluidProperties::rho(Real pressure, Real temperature, Real quali
 
 void
 CarbonDioxideHEMFluidProperties::rho_dpT(Real /*pressure*/,
-                                      Real /*temperature*/,
-                                      Real & /*rho*/,
-                                      Real & /*drho_dp*/,
-                                      Real & /*drho_dT*/) const
+                                         Real /*temperature*/,
+                                         Real & /*rho*/,
+                                         Real & /*drho_dp*/,
+                                         Real & /*drho_dT*/) const
 {
   // LibSBTL does not provide a way to compute derivatives of rho wrt p and T
   mooseError("Not Implemented.");
@@ -410,7 +410,7 @@ void
 CarbonDioxideHEMFluidProperties::rho_e(Real pressure, Real temperature, Real & rho, Real & e) const
 {
   Real v;
-  const unsigned int ierr = PT_FLASH_L(pressure * _to_MPa, temperature, v, e);
+  const unsigned int ierr = PT_FLASH_L_CO2(pressure * _to_MPa, temperature, v, e);
   if (ierr != I_OK)
   {
     rho = getNaN();
@@ -469,19 +469,19 @@ CarbonDioxideHEMFluidProperties::dp_duv(
       break;
     case (IREG_TP):
       if (str_state < STR_DTP)
-        DIFF_SAT_VU_SPL(_td_props.ps,
-                        _td_props.x,
-                        _td_props.v1,
-                        _td_props.v1s,
-                        _td_props.dz_1.x1tmin,
-                        _td_props.dz_1.x1tmax,
-                        _td_props.dz_1.dvdu_vt,
-                        _td_props.dz_1.K,
-                        _td_props.v2,
-                        _td_props.v2t,
-                        _td_props.u1,
-                        _td_props.u2,
-                        _td_props.d_tp);
+        DIFF_SAT_VU_SPL_CO2(_td_props.ps,
+                            _td_props.x,
+                            _td_props.v1,
+                            _td_props.v1s,
+                            _td_props.dz_1.x1tmin,
+                            _td_props.dz_1.x1tmax,
+                            _td_props.dz_1.dvdu_vt,
+                            _td_props.dz_1.K,
+                            _td_props.v2,
+                            _td_props.v2t,
+                            _td_props.u1,
+                            _td_props.u2,
+                            _td_props.d_tp);
       p = _td_props.ps * _to_Pa;
       dpdv_u = _td_props.d_tp.dpdv_u * _to_Pa;
       dpdu_v = _td_props.d_tp.dpdu_v * (_to_Pa / _to_J);
@@ -535,9 +535,9 @@ CarbonDioxideHEMFluidProperties::h_lat(Real temperature, Real & hf, Real & hg, R
 {
   static const Real t0 = 216.592;
   static const Real tc = 304.1282;
-  static const Real pc=7.37729837321;
-  static const Real vc=1./467.60000128174;
-  static const Real uc=316.468709888;
+  static const Real pc = 7.37729837321;
+  static const Real vc = 1. / 467.60000128174;
+  static const Real uc = 316.468709888;
   static const Real hc = uc + pc * vc * 1.e3;
   Real t = temperature;
   Real ps, vl, ul, vv, vvt, uv, hl, hv;
@@ -553,9 +553,9 @@ CarbonDioxideHEMFluidProperties::h_lat(Real temperature, Real & hf, Real & hg, R
   else
   {
     ps = PS_T_INV_CO2(t);
-    if (PT_FLASH_L(ps, t, vl, ul))
+    if (PT_FLASH_L_CO2(ps, t, vl, ul))
       mooseError("The temperature provided is not in the valid range of the library");
-    if (PT_FLASH_G(ps, t, vv, vvt, uv))
+    if (PT_FLASH_G_CO2(ps, t, vv, vvt, uv))
       mooseError("The temperature provided is not in the valid range of the library");
 
     hl = (ul + ps * vl * 1.e3) * _to_J;

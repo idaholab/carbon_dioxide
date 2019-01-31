@@ -68,7 +68,7 @@ SBTLAPI double __stdcall PS_T_INV_CO2(double t);
 SBTLAPI double __stdcall V2_P_AUX_CO2_T(double pt);
 SBTLAPI double __stdcall U2_T_AUX_CO2(double t);
 //
-SBTLAPI int __stdcall PT_FLASH_L(double p, double t, double& v, double& u) throw()
+SBTLAPI int __stdcall PT_FLASH_L_CO2(double p, double t, double& v, double& u) throw()
 {
     double vs,x1tmin,x1tmax;
     static const double x1zmin=1.;
@@ -128,7 +128,7 @@ SBTLAPI int __stdcall PT_FLASH_L(double p, double t, double& v, double& u) throw
     return I_OK;
 }
 //
-SBTLAPI int __stdcall PT_FLASH_DERIV_L(double p, double t, double& v, double& dvdp_t, double& dvdt_p, double& dpdt_v, double& u, double& dudp_t, double& dudt_p, double& dpdt_u) throw()
+SBTLAPI int __stdcall PT_FLASH_DERIV_L_CO2(double p, double t, double& v, double& dvdp_t, double& dvdt_p, double& dpdt_v, double& u, double& dudp_t, double& dudt_p, double& dpdt_u) throw()
 {
     double vs,x1tmin,x1tmax,p_,t_;
     double v_u_pmax,dvdu_pmax,v_u_spndl,dvdu_spndl,dvdu_min,dvdu_max,K,dvdu_vt;
@@ -207,7 +207,7 @@ SBTLAPI int __stdcall PT_FLASH_DERIV_L(double p, double t, double& v, double& dv
     return I_OK;
 }
 //
-SBTLAPI int __stdcall PT_FLASH_G(double p, double t, double& v, double& vt, double& u) throw()
+SBTLAPI int __stdcall PT_FLASH_G_CO2(double p, double t, double& v, double& vt, double& u) throw()
 {
     static const double pc=7.37729837321;
     static const double tc=304.1282;
@@ -260,7 +260,7 @@ SBTLAPI int __stdcall PT_FLASH_G(double p, double t, double& v, double& vt, doub
     return I_OK;
 }
 
-SBTLAPI int __stdcall PT_FLASH_DERIV_G(double p, double t, double& v, double& vt, double& dvdp_t, double& dvdt_p, double& dpdt_v, double& u, double& dudp_t, double& dudt_p, double& dpdt_u) throw()
+SBTLAPI int __stdcall PT_FLASH_DERIV_G_CO2(double p, double t, double& v, double& vt, double& dvdp_t, double& dvdt_p, double& dpdt_v, double& u, double& dudp_t, double& dudt_p, double& dpdt_u) throw()
 {
     static const double pc=7.37729837321;
     static const double tc=304.1282;
@@ -325,7 +325,7 @@ SBTLAPI int __stdcall PT_FLASH_DERIV_G(double p, double t, double& v, double& vt
     return I_OK;
 }
 //
-SBTLAPI int PT_FLASH_G_T(double p, double t, double& vt, double& u) throw()
+SBTLAPI int PT_FLASH_G_CO2_T(double p, double t, double& vt, double& u) throw()
 {
     static const double pc=7.37729837321;
     static const double tc=304.1282;
