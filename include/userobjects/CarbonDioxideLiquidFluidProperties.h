@@ -37,6 +37,7 @@ public:
   virtual Real c_from_v_e(Real v, Real e) const override;
   virtual void c_from_v_e(Real v, Real e, Real & c, Real & dc_dv, Real & dc_de) const override;
   virtual Real cp_from_v_e(Real v, Real e) const override;
+  virtual void cp_from_v_e(Real v, Real e, Real & cp, Real & dcp_dv, Real & dcp_de) const override;
   virtual Real cv_from_v_e(Real v, Real e) const override;
   virtual Real mu_from_v_e(Real v, Real e) const override;
   virtual Real k_from_v_e(Real v, Real e) const override;
@@ -61,6 +62,8 @@ public:
   virtual void p_from_h_s(Real h, Real s, Real & p, Real & dp_dh, Real & dp_ds) const override;
   virtual Real g_from_v_e(Real v, Real e) const override;
   virtual Real beta_from_p_T(Real p, Real T) const override;
+  virtual void
+  beta_from_p_T(Real p, Real T, Real & beta, Real & dbeta_dp, Real & dbeta_dT) const override;
   virtual Real sigma_from_p_T(Real p, Real T) const override;
   virtual Real molarMass() const override;
   virtual Real criticalTemperature() const override;
