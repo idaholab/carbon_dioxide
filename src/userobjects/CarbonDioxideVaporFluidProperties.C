@@ -164,6 +164,15 @@ CarbonDioxideVaporFluidProperties::cp_from_v_e(Real v, Real e) const
   return CP_VU_G_CO2(v, e * _to_kJ) * _to_J;
 }
 
+void
+CarbonDioxideVaporFluidProperties::cp_from_v_e(
+    Real v, Real e, Real & cp, Real & dcp_dv, Real & dcp_de) const
+{
+  cp = cp_from_v_e(v, e);
+  dcp_dv = 0;
+  dcp_de = 0;
+}
+
 Real
 CarbonDioxideVaporFluidProperties::cv_from_v_e(Real v, Real e) const
 {
@@ -230,6 +239,15 @@ CarbonDioxideVaporFluidProperties::beta_from_p_T(Real p, Real T) const
   double rho, drho_dp, drho_dT;
   rho_from_p_T(p, T, rho, drho_dp, drho_dT);
   return -drho_dT / rho;
+}
+
+void
+CarbonDioxideVaporFluidProperties::beta_from_p_T(
+    Real p, Real T, Real & beta, Real & dbeta_dp, Real & dbeta_dT) const
+{
+  beta = beta_from_p_T(p, T);
+  dbeta_dp = 0;
+  dbeta_dT = 0;
 }
 
 Real
