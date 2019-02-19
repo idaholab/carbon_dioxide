@@ -26,6 +26,9 @@ class CarbonDioxideHEMFluidProperties : public HEMFluidProperties, public NaNInt
 public:
   CarbonDioxideHEMFluidProperties(const InputParameters & parameters);
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Woverloaded-virtual"
+
   virtual Real pressure(Real v, Real e) const override;
   virtual Real temperature(Real v, Real e) const override;
   virtual Real quality(Real v, Real e) const override;
@@ -59,6 +62,8 @@ public:
   virtual Real criticalTemperature() const override;
   virtual Real criticalDensity() const override;
   virtual Real criticalInternalEnergy() const override;
+
+#pragma GCC diagnostic pop
 
 private:
   /// Thermodynamic Properties
