@@ -26,6 +26,9 @@ class CarbonDioxideVaporFluidProperties : public SinglePhaseFluidProperties, pub
 public:
   CarbonDioxideVaporFluidProperties(const InputParameters & parameters);
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Woverloaded-virtual"
+
   virtual Real p_from_v_e(Real v, Real e) const override;
   virtual void p_from_v_e(Real v, Real e, Real & p, Real & dp_dv, Real & dp_de) const override;
   virtual Real T_from_v_e(Real v, Real e) const override;
@@ -64,6 +67,8 @@ public:
   virtual Real criticalTemperature() const override;
   virtual Real criticalDensity() const override;
   virtual Real criticalInternalEnergy() const override;
+
+#pragma GCC diagnostic pop
 
 protected:
   /// Conversion factor from Pa to MPa
