@@ -23,6 +23,8 @@ public:
   virtual Real p_sat(Real temperature) const;
   virtual Real dT_sat_dp(Real pressure) const;
 
+  virtual bool supportsPhaseChange() const override { return true; }
+
 protected:
   // Critical pressure
   static const Real _P_critical;
