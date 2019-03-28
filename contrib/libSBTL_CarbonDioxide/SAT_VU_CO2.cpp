@@ -522,6 +522,7 @@ SBTLAPI int __stdcall SAT_H1_SPL_CO2(double h, double& ps, double& ts, double& v
     pst=PS_H_AUX_CO2_T(h);
     ps=pst*pst;
     vl=V1_H_AUX_CO2(h);
+    vt=x1zmax;
 
     //newtons method
     double f_p=-1.,ps_inv=1.,f_t=-1.;

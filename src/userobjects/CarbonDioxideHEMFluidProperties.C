@@ -171,6 +171,7 @@ CarbonDioxideHEMFluidProperties::c(Real v, Real e) const
       rho_m = alpha_l / _td_props.v1 + alpha_v / _td_props.v2; // density of mixture
       switch (_ss_flag)
       {
+        default:
         case (SS_WOOD):
           K1 = _td_props.v1 / (w1 * w1);
           K2 = _td_props.v2 / (w2 * w2);
