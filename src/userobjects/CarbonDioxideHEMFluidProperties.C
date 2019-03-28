@@ -198,6 +198,8 @@ CarbonDioxideHEMFluidProperties::c(Real v, Real e) const
           K_m = alpha_l * K1 + alpha_v * K2 +
                 alpha_l * _td_props.v2 * cp1 * dt_dp / (_td_props.v1 * L * 1.e6);
           return 1. / sqrt(K_m * rho_m);
+        default:
+          mooseError("Unknown 2phase flag");
       }
     default:
       return getNaN();
