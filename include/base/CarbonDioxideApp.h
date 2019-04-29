@@ -1,5 +1,4 @@
-#ifndef CARBONDIOXIDEAPP_H
-#define CARBONDIOXIDEAPP_H
+#pragma once
 
 #include "MooseApp.h"
 
@@ -19,5 +18,3 @@ public:
 
 protected:
 };
-
-#endif /* CARBONDIOXIDEAPP_H */

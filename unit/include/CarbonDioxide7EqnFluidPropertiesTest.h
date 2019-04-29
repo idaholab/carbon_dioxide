@@ -1,5 +1,4 @@
-#ifndef HEAVYWATER7EQNFLUIDPROPERTIESTEST_H
-#define HEAVYWATER7EQNFLUIDPROPERTIESTEST_H
+#pragma once
 
 #include "MooseObjectUnitTest.h"
 #include "CarbonDioxide7EqnFluidProperties.h"
@@ -19,5 +18,3 @@ protected:
 
   const CarbonDioxide7EqnFluidProperties * _fp;
 };
-
-#endif /* HEAVYWATER7EQNFLUIDPROPERTIESTEST_H */

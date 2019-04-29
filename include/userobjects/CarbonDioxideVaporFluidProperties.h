@@ -1,5 +1,4 @@
-#ifndef CARBONDIOXIDEVAPORFLUIDPROPERTIES_H
-#define CARBONDIOXIDEVAPORFLUIDPROPERTIES_H
+#pragma once
 
 #include "SinglePhaseFluidProperties.h"
 #include "NaNInterface.h"
@@ -80,5 +79,3 @@ protected:
   /// Conversion factor from kJ to J
   const Real _to_J;
 };
-
-#endif /* CARBONDIOXIDEVAPORFLUIDPROPERTIES_H */
