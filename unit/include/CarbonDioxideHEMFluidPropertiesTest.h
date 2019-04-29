@@ -1,5 +1,4 @@
-#ifndef HEAVYWATERHEMFLUIDPROPERTIESTEST_H
-#define HEAVYWATERHEMFLUIDPROPERTIESTEST_H
+#pragma once
 
 #include "MooseObjectUnitTest.h"
 #include "CarbonDioxideHEMFluidProperties.h"
@@ -19,5 +18,3 @@ protected:
 
   const CarbonDioxideHEMFluidProperties * _fp;
 };
-
-#endif
