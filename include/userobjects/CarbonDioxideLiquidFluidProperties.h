@@ -1,5 +1,4 @@
-#ifndef CARBONDIOXIDELIQUIDFLUIDPROPERTIES_H
-#define CARBONDIOXIDELIQUIDFLUIDPROPERTIES_H
+#pragma once
 
 #include "SinglePhaseFluidProperties.h"
 #include "LiquidFluidPropertiesInterface.h"
@@ -87,5 +86,3 @@ protected:
   /// Conversion factor from mN to N
   const Real _to_N;
 };
-
-#endif /* CARBONDIOXIDELIQUIDFLUIDPROPERTIES_H */

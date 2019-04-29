@@ -1,5 +1,4 @@
-#ifndef HEAVYWATERVAPORFLUIDPROPERTIESTEST_H
-#define HEAVYWATERVAPORFLUIDPROPERTIESTEST_H
+#pragma once
 
 #include "MooseObjectUnitTest.h"
 #include "CarbonDioxideVaporFluidProperties.h"
@@ -19,5 +18,3 @@ protected:
 
   const CarbonDioxideVaporFluidProperties * _fp;
 };
-
-#endif

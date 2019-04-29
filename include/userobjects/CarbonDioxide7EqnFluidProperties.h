@@ -1,5 +1,4 @@
-#ifndef CARBONDIOXIDE7EQNFLUIDPROPERTIES_H
-#define CARBONDIOXIDE7EQNFLUIDPROPERTIES_H
+#pragma once
 
 #include "TwoPhaseFluidProperties.h"
 #include "NaNInterface.h"
@@ -29,5 +28,3 @@ protected:
   // Critical pressure
   static const Real _P_critical;
 };
-
-#endif /* CARBONDIOXIDE7EQNFLUIDPROPERTIES_H */

@@ -1,5 +1,4 @@
-#ifndef CARBONDIOXIDEHEMFLUIDPROPERTIES_H
-#define CARBONDIOXIDEHEMFLUIDPROPERTIES_H
+#pragma once
 
 #include "HEMFluidProperties.h"
 #include "NaNInterface.h"
@@ -85,5 +84,3 @@ protected:
   // Critical pressure
   static const Real _P_critical;
 };
-
-#endif /* CARBONDIOXIDEHEMFLUIDPROPERTIES_H */
