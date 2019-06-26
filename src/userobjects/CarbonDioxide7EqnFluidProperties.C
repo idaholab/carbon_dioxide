@@ -27,14 +27,14 @@ CarbonDioxide7EqnFluidProperties::CarbonDioxide7EqnFluidProperties(const InputPa
     InputParameters params = _app.getFactory().getValidParams(class_name);
     _fe_problem.addUserObject(class_name, _liquid_name, params);
   }
-  _fp_liquid = &_fe_problem.getUserObject<SinglePhaseFluidProperties>(_liquid_name);
+  _fp_liquid = &_fe_problem.getUserObjectTempl<SinglePhaseFluidProperties>(_liquid_name);
 
   {
     std::string class_name = "CarbonDioxideVaporFluidProperties";
     InputParameters params = _app.getFactory().getValidParams(class_name);
     _fe_problem.addUserObject(class_name, _vapor_name, params);
   }
-  _fp_vapor = &_fe_problem.getUserObject<SinglePhaseFluidProperties>(_vapor_name);
+  _fp_vapor = &_fe_problem.getUserObjectTempl<SinglePhaseFluidProperties>(_vapor_name);
 }
 
 Real
