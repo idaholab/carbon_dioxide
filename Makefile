@@ -33,7 +33,7 @@ ifneq (,$(findstring +,$(moose_status)))
   endif
 endif
 
-all:: moose_submodule_status
+all: moose_submodule_status
 
 moose_submodule_status:
 	@if [ x$(moose_status_msg) != "x" ]; then echo $(moose_status_msg); fi
