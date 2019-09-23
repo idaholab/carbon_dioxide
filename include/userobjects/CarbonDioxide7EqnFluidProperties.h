@@ -11,6 +11,10 @@ InputParameters validParams<CarbonDioxide7EqnFluidProperties>();
 
 /**
  * CarbonDioxide interface for 7-eqn model
+ *
+ * Range of validity:
+ *   0.0005 MPa <= p <= 100 MPa
+ *   T_triple (216.59 K) <= T <= 1300 K
  */
 class CarbonDioxide7EqnFluidProperties : public TwoPhaseFluidProperties, public NaNInterface
 {
