@@ -22,19 +22,21 @@ validParams<CarbonDioxide7EqnFluidProperties>()
 CarbonDioxide7EqnFluidProperties::CarbonDioxide7EqnFluidProperties(const InputParameters & parameters)
   : TwoPhaseFluidProperties(parameters), NaNInterface(this)
 {
+  if (_tid == 0)
   {
     std::string class_name = "CarbonDioxideLiquidFluidProperties";
     InputParameters params = _app.getFactory().getValidParams(class_name);
     _fe_problem.addUserObject(class_name, _liquid_name, params);
   }
-  _fp_liquid = &_fe_problem.getUserObjectTempl<SinglePhaseFluidProperties>(_liquid_name);
+  _fp_liquid = &_fe_problem.getUserObjectTempl<SinglePhaseFluidProperties>(_liquid_name, _tid);
 
+  if (_tid == 0)
   {
     std::string class_name = "CarbonDioxideVaporFluidProperties";
     InputParameters params = _app.getFactory().getValidParams(class_name);
     _fe_problem.addUserObject(class_name, _vapor_name, params);
   }
-  _fp_vapor = &_fe_problem.getUserObjectTempl<SinglePhaseFluidProperties>(_vapor_name);
+  _fp_vapor = &_fe_problem.getUserObjectTempl<SinglePhaseFluidProperties>(_vapor_name, _tid);
 }
 
 Real
