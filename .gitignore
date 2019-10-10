@@ -72,6 +72,7 @@ traceout*.txt
 include/base/CarbonDioxideRevision.h
 include/CarbonDioxideRevision.h
 build
+.tags
 
 # Allow output files in gold directories
 !**/gold/*.e
