@@ -1,0 +1,9 @@
+# CarbonDioxideTwoPhaseFluidProperties
+
+!syntax description /Modules/FluidProperties/CarbonDioxideTwoPhaseFluidProperties
+
+!syntax parameters /Modules/FluidProperties/CarbonDioxideTwoPhaseFluidProperties
+
+!syntax inputs /Modules/FluidProperties/CarbonDioxideTwoPhaseFluidProperties
+
+!syntax children /Modules/FluidProperties/CarbonDioxideTwoPhaseFluidProperties
