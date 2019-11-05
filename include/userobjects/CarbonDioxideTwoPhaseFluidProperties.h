@@ -3,23 +3,23 @@
 #include "TwoPhaseFluidProperties.h"
 #include "NaNInterface.h"
 
-class CarbonDioxide7EqnFluidProperties;
+class CarbonDioxideTwoPhaseFluidProperties;
 class SinglePhaseFluidProperties;
 
 template <>
-InputParameters validParams<CarbonDioxide7EqnFluidProperties>();
+InputParameters validParams<CarbonDioxideTwoPhaseFluidProperties>();
 
 /**
- * CarbonDioxide interface for 7-eqn model
+ * Two-phase carbon dioxide fluid properties
  *
  * Range of validity:
  *   0.0005 MPa <= p <= 100 MPa
  *   T_triple (216.59 K) <= T <= 1300 K
  */
-class CarbonDioxide7EqnFluidProperties : public TwoPhaseFluidProperties, public NaNInterface
+class CarbonDioxideTwoPhaseFluidProperties : public TwoPhaseFluidProperties, public NaNInterface
 {
 public:
-  CarbonDioxide7EqnFluidProperties(const InputParameters & parameters);
+  CarbonDioxideTwoPhaseFluidProperties(const InputParameters & parameters);
 
   virtual Real p_critical() const override;
   virtual Real T_sat(Real pressure) const override;
