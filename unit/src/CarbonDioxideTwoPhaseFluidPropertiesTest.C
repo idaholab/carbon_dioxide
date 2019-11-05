@@ -1,12 +1,12 @@
-#include "CarbonDioxide7EqnFluidPropertiesTest.h"
+#include "CarbonDioxideTwoPhaseFluidPropertiesTest.h"
 #include "SinglePhaseFluidPropertiesTestUtils.h"
 
-TEST_F(CarbonDioxide7EqnFluidPropertiesTest, test)
+TEST_F(CarbonDioxideTwoPhaseFluidPropertiesTest, test)
 {
   const Real relative_perturbation = 1e-6;
 
   Real T = 20. + 273.15; // K
-  Real p = 1.e6;        // Pa
+  Real p = 1.e6;         // Pa
 
   // Tsat + derivatives
   REL_TEST(_fp->T_sat(p), 233.02825123991201, REL_TOL_SAVED_VALUE);
