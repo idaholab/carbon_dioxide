@@ -61,9 +61,14 @@ TEST_F(CarbonDioxideLiquidFluidPropertiesTest, test)
   REL_TEST(cv, 935.30996220147495, REL_TOL_SAVED_VALUE);
 
   // mu
-  const Real mu = _fp->mu_from_v_e(v, e);
+  Real mu = _fp->mu_from_v_e(v, e);
   // TODO: REL_TEST(mu, mu_external, REL_TOL_EXTERNAL_VALUE);
   REL_TEST(mu, 0.00010422532124202926, REL_TOL_SAVED_VALUE);
+  Real dmu_dv, dmu_de;
+  _fp->mu_from_v_e(v, e, mu, dmu_dv, dmu_de);
+  REL_TEST(mu, 0.00010422532124202926, REL_TOL_SAVED_VALUE);
+  REL_TEST(dmu_dv, 0., REL_TOL_SAVED_VALUE);
+  REL_TEST(dmu_de, 0., REL_TOL_SAVED_VALUE);
 
   // k
   const Real k = _fp->k_from_v_e(v, e);

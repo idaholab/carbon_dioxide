@@ -184,6 +184,16 @@ CarbonDioxideLiquidFluidProperties::mu_from_v_e(Real v, Real e) const
   return ETA_VU_L_CO2(v, e * _to_kJ);
 }
 
+void
+CarbonDioxideLiquidFluidProperties::mu_from_v_e(
+    Real v, Real e, Real & mu, Real & dmu_dv, Real & dmu_de) const
+{
+  mu = mu_from_v_e(v, e);
+  // currently, there is no API for the derivatives in the SBTL package
+  dmu_de = 0;
+  dmu_dv = 0;
+}
+
 Real
 CarbonDioxideLiquidFluidProperties::k_from_v_e(Real v, Real e) const
 {
