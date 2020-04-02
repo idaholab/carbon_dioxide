@@ -54,6 +54,7 @@ TEST_F(CarbonDioxideVaporFluidPropertiesTest, test)
   const Real cp = _fp->cp_from_v_e(v, e);
   // TODO: REL_TEST(cp, cp_external, REL_TOL_EXTERNAL_VALUE);
   REL_TEST(cp, 846.00136881550372, REL_TOL_SAVED_VALUE);
+  DERIV_TEST(_fp->cp_from_v_e, v, e, REL_TOL_DERIVATIVE);
 
   // cv
   const Real cv = _fp->cv_from_v_e(v, e);
