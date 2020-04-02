@@ -55,6 +55,10 @@ extern "C" void
 DIFF_W_VU_G_CO2(double v, double u, double & c, double & dcdv, double & dcdu, double & dudv);
 extern "C" void
 DIFF_U_VP_G_CO2(double v, double p, double & u, double & dudv_p, double & dudp_v, double & dpdv_u);
+extern "C" void DIFF_ETA_VU_G_CO2_T(
+    double vt, double v, double u, double & eta, double & detadv, double & detadu, double & dudv);
+extern "C" void DIFF_CP_VU_G_CO2_T(
+    double vt, double v, double u, double & cp, double & dcpdv, double & dcpdu, double & dudv);
 
 extern "C" int PH_FLASH_G_CO2(double p, double h, double & v, double & vt, double & u);
 
@@ -168,9 +172,12 @@ void
 CarbonDioxideVaporFluidProperties::cp_from_v_e(
     Real v, Real e, Real & cp, Real & dcp_dv, Real & dcp_de) const
 {
-  cp = cp_from_v_e(v, e);
-  dcp_dv = 0;
-  dcp_de = 0;
+  double vt = std::log(v);
+  double de_dv;
+  DIFF_CP_VU_G_CO2_T(vt, v, e * _to_kJ, cp, dcp_dv, dcp_de, de_dv);
+
+  cp *= _to_J;
+  dcp_dv *= _to_J;
 }
 
 Real
@@ -183,6 +190,16 @@ Real
 CarbonDioxideVaporFluidProperties::mu_from_v_e(Real v, Real e) const
 {
   return ETA_VU_G_CO2(v, e * _to_kJ);
+}
+
+void
+CarbonDioxideVaporFluidProperties::mu_from_v_e(
+    Real v, Real e, Real & mu, Real & dmu_dv, Real & dmu_de) const
+{
+  double vt = std::log(v);
+  double dv_de;
+  DIFF_ETA_VU_G_CO2_T(vt, v, e * _to_kJ, mu, dmu_dv, dmu_de, dv_de);
+  dmu_de /= _to_J;
 }
 
 Real
