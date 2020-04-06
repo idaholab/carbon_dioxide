@@ -59,12 +59,11 @@ extern "C" int PH_FLASH_L_CO2(double p, double h, double & v, double & u);
 
 registerMooseObject("CarbonDioxideApp", CarbonDioxideLiquidFluidProperties);
 
-template <>
 InputParameters
-validParams<CarbonDioxideLiquidFluidProperties>()
+CarbonDioxideLiquidFluidProperties::validParams()
 {
-  InputParameters params = validParams<SinglePhaseFluidProperties>();
-  params += validParams<NaNInterface>();
+  InputParameters params = SinglePhaseFluidProperties::validParams();
+  params += NaNInterface::validParams();
   params.addClassDescription("Fluid properties of liquid carbon dioxide (meta stable).");
   return params;
 }

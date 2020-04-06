@@ -64,12 +64,11 @@ extern "C" int PH_FLASH_G_CO2(double p, double h, double & v, double & vt, doubl
 
 registerMooseObject("CarbonDioxideApp", CarbonDioxideVaporFluidProperties);
 
-template <>
 InputParameters
-validParams<CarbonDioxideVaporFluidProperties>()
+CarbonDioxideVaporFluidProperties::validParams()
 {
-  InputParameters params = validParams<SinglePhaseFluidProperties>();
-  params += validParams<NaNInterface>();
+  InputParameters params = SinglePhaseFluidProperties::validParams();
+  params += NaNInterface::validParams();
   params.addClassDescription("Fluid properties of steam (meta stable).");
   return params;
 }

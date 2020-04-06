@@ -5,11 +5,6 @@
 #include "contrib/libSBTL_CarbonDioxide/SBTL_CO2.h"
 #include "contrib/libSBTL_CarbonDioxide/SBTL_flags.h"
 
-class CarbonDioxideHEMFluidProperties;
-
-template <>
-InputParameters validParams<CarbonDioxideHEMFluidProperties>();
-
 /**
  * Carbon Dioxide HEM fluid properties
  *
@@ -83,4 +78,7 @@ protected:
 protected:
   // Critical pressure
   static const Real _P_critical;
+
+public:
+  static InputParameters validParams();
 };

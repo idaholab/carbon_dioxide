@@ -3,12 +3,6 @@
 #include "TwoPhaseFluidProperties.h"
 #include "NaNInterface.h"
 
-class CarbonDioxideTwoPhaseFluidProperties;
-class SinglePhaseFluidProperties;
-
-template <>
-InputParameters validParams<CarbonDioxideTwoPhaseFluidProperties>();
-
 /**
  * Two-phase carbon dioxide fluid properties
  *
@@ -31,4 +25,7 @@ public:
 protected:
   // Critical pressure
   static const Real _P_critical;
+
+public:
+  static InputParameters validParams();
 };
