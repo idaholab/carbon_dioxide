@@ -3,11 +3,6 @@
 #include "SinglePhaseFluidProperties.h"
 #include "NaNInterface.h"
 
-class CarbonDioxideVaporFluidProperties;
-
-template <>
-InputParameters validParams<CarbonDioxideVaporFluidProperties>();
-
 /**
  * Heavy Water formulation for steam
  *
@@ -79,4 +74,7 @@ protected:
   const Real _to_kJ;
   /// Conversion factor from kJ to J
   const Real _to_J;
+
+public:
+  static InputParameters validParams();
 };
