@@ -11,13 +11,12 @@ const Real CarbonDioxideHEMFluidProperties::_P_critical = 7.37729837321E+6;
 extern "C" double __stdcall SIGMA_TS_CO2(double t);
 extern "C" void __stdcall DIFF_TS_P_CO2(double p, double & ts, double & dtsdp);
 
-template <>
 InputParameters
-validParams<CarbonDioxideHEMFluidProperties>()
+CarbonDioxideHEMFluidProperties::validParams()
 {
   MooseEnum ss_flag("WOOD FROZEN THERMAL_EQ", "WOOD");
-  InputParameters params = validParams<HEMFluidProperties>();
-  params += validParams<NaNInterface>();
+  InputParameters params = HEMFluidProperties::validParams();
+  params += NaNInterface::validParams();
   params.addClassDescription(
       "Fluid properties of carbon dioxide for the homogeneous equilibrium model.");
   params.addParam<MooseEnum>(

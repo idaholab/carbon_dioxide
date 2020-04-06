@@ -4,11 +4,6 @@
 #include "LiquidFluidPropertiesInterface.h"
 #include "NaNInterface.h"
 
-class CarbonDioxideLiquidFluidProperties;
-
-template <>
-InputParameters validParams<CarbonDioxideLiquidFluidProperties>();
-
 /**
  * Carbon Dioxide formulation for liquid water
  *
@@ -86,4 +81,7 @@ protected:
   const Real _to_J;
   /// Conversion factor from mN to N
   const Real _to_N;
+
+public:
+  static InputParameters validParams();
 };

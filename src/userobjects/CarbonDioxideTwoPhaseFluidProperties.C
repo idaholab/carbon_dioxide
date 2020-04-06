@@ -9,12 +9,11 @@ const Real CarbonDioxideTwoPhaseFluidProperties::_P_critical = 7.37729837321E+6;
 
 registerMooseObject("CarbonDioxideApp", CarbonDioxideTwoPhaseFluidProperties);
 
-template <>
 InputParameters
-validParams<CarbonDioxideTwoPhaseFluidProperties>()
+CarbonDioxideTwoPhaseFluidProperties::validParams()
 {
-  InputParameters params = validParams<TwoPhaseFluidProperties>();
-  params += validParams<NaNInterface>();
+  InputParameters params = TwoPhaseFluidProperties::validParams();
+  params += NaNInterface::validParams();
   params.addClassDescription("Two-phase carbon dioxide fluid properties");
   return params;
 }
