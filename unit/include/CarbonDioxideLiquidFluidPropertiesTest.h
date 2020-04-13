@@ -13,7 +13,7 @@ protected:
   {
     InputParameters uo_pars = _factory.getValidParams("CarbonDioxideLiquidFluidProperties");
     _fe_problem->addUserObject("CarbonDioxideLiquidFluidProperties", "fp", uo_pars);
-    _fp = &_fe_problem->getUserObjectTempl<CarbonDioxideLiquidFluidProperties>("fp");
+    _fp = &_fe_problem->getUserObject<CarbonDioxideLiquidFluidProperties>("fp");
   }
 
   const CarbonDioxideLiquidFluidProperties * _fp;
