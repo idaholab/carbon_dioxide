@@ -16,7 +16,7 @@ protected:
   {
     InputParameters uo_pars = _factory.getValidParams("CarbonDioxideTwoPhaseFluidProperties");
     _fe_problem->addUserObject("CarbonDioxideTwoPhaseFluidProperties", "fp", uo_pars);
-    _fp = &_fe_problem->getUserObjectTempl<CarbonDioxideTwoPhaseFluidProperties>("fp");
+    _fp = &_fe_problem->getUserObject<CarbonDioxideTwoPhaseFluidProperties>("fp");
   }
 
   const CarbonDioxideTwoPhaseFluidProperties * _fp;
