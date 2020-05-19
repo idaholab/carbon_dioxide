@@ -3,6 +3,9 @@
 #include "TwoPhaseFluidProperties.h"
 #include "NaNInterface.h"
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Woverloaded-virtual"
+
 /**
  * Two-phase carbon dioxide fluid properties
  *
@@ -29,3 +32,5 @@ protected:
 public:
   static InputParameters validParams();
 };
+
+#pragma GCC diagnostic pop
