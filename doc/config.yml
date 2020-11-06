@@ -21,9 +21,6 @@ Extensions:
 
     MooseDocs.extensions.appsyntax:
         executable: ${ROOT_DIR}
-        hide:
-            framework: !include ${MOOSE_DIR}/framework/doc/hidden.yml
-            fluid_properties: !include ${MOOSE_DIR}/modules/fluid_properties/doc/hidden.yml
         includes:
             - include
             - ${MOOSE_DIR}/framework/include
