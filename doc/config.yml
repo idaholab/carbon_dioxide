@@ -13,7 +13,6 @@ Extensions:
     MooseDocs.extensions.navigation:
         name: carbon_dioxide
         repo: https://hpcgitlab.hpc.inl.gov/idaholab/carbon_dioxide
-        home: https://hpcsc.inl.gov/ssl/CARBON_DIOXIDE/site/index.html
         menu:
             Developers:
                 Workflow: workflow.md
