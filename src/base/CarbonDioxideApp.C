@@ -47,5 +47,5 @@ CarbonDioxideApp::registerAll(Factory & f, ActionFactory & af, Syntax & s)
   Registry::registerObjectsTo(f, {"CarbonDioxideApp"});
   Registry::registerActionsTo(af, {"CarbonDioxideApp"});
 
-  ModulesApp::registerAll(f, af, s);
+  ModulesApp::registerAllObjects<CarbonDioxideApp>(f, af, s);
 }
