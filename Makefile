@@ -7,9 +7,13 @@
 # FRAMEWORK_DIR    - Location of the MOOSE framework
 #
 ###############################################################################
-# Use the MOOSE submodule if it exists and MOOSE_DIR is not set
+# Use MOOSE_DIR if it is already set
+# First check being a contrib in the MOOSE fluid properties module, then check
+# if the MOOSE submodule is created
 MOOSE_SUBMODULE    := $(CURDIR)/moose
-ifneq ($(wildcard $(MOOSE_SUBMODULE)/framework/Makefile),)
+ifneq (,$(findstring modules/fluid_properties/contrib,$(CURDIR)))
+  MOOSE_DIR        ?= $(CURDIR)/../../../../
+else ifneq ($(wildcard $(MOOSE_SUBMODULE)/framework/Makefile),)
   MOOSE_DIR        ?= $(MOOSE_SUBMODULE)
 else
   MOOSE_DIR        ?= $(shell dirname `pwd`)/moose
@@ -43,7 +47,9 @@ include $(FRAMEWORK_DIR)/build.mk
 include $(FRAMEWORK_DIR)/moose.mk
 
 ################################## MODULES ####################################
-FLUID_PROPERTIES  := yes
+FLUID_PROPERTIES      := yes
+# Needed to avoid recursion in fluid properties module recipe
+BUILDING_FP_APP       := yes
 include $(MOOSE_DIR)/modules/modules.mk
 ###############################################################################
 
