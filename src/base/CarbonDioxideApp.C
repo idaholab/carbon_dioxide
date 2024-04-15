@@ -13,7 +13,9 @@
 #include "AppFactory.h"
 
 // Modules
+#ifndef SKIP_MODULE_LOAD
 #include "ModulesApp.h"
+#endif
 
 InputParameters
 CarbonDioxideApp::validParams()
@@ -56,5 +58,8 @@ CarbonDioxideApp::registerAll(Factory & f, ActionFactory & af, Syntax & s)
   Registry::registerObjectsTo(f, {"CarbonDioxideApp"});
   Registry::registerActionsTo(af, {"CarbonDioxideApp"});
 
+  libmesh_ignore(s);
+#ifndef SKIP_MODULE_LOAD
   ModulesApp::registerAllObjects<CarbonDioxideApp>(f, af, s);
+#endif
 }
