@@ -73,6 +73,7 @@ include/base/CarbonDioxideRevision.h
 include/CarbonDioxideRevision.h
 build
 .tags
+carbon_dioxide.yaml
 
 # Allow output files in gold directories
 !**/gold/*.e
