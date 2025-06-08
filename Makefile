@@ -49,7 +49,7 @@ include $(FRAMEWORK_DIR)/moose.mk
 ################################## MODULES ####################################
 FLUID_PROPERTIES      := yes
 # Needed to avoid recursion in fluid properties module recipe
-BUILDING_FP_APP       := yes
+BUILDING_FP_APP       := carbon_dioxide
 include $(MOOSE_DIR)/modules/modules.mk
 ###############################################################################
 
