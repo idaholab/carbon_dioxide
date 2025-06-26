@@ -16,7 +16,7 @@ class Factory;
 class CarbonDioxideApp : public MooseApp
 {
 public:
-  CarbonDioxideApp(InputParameters parameters);
+  CarbonDioxideApp(const InputParameters & parameters);
 
 public:
   static InputParameters validParams();

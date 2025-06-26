@@ -27,7 +27,7 @@ CarbonDioxideApp::validParams()
 
 registerKnownLabel("CarbonDioxideApp");
 
-CarbonDioxideApp::CarbonDioxideApp(InputParameters parameters) : MooseApp(parameters)
+CarbonDioxideApp::CarbonDioxideApp(const InputParameters & parameters) : MooseApp(parameters)
 {
   CarbonDioxideApp::registerAll(_factory, _action_factory, _syntax);
 }
